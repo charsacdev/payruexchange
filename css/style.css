@@ -69,6 +69,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
 img, svg {

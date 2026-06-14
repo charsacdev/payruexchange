@@ -872,6 +872,11 @@
     text-align: center;
   }
 
+  .hero-text,
+  .hero-visual {
+    min-width: 0;
+  }
+
   .hero p.lead {
     margin: 0 auto 32px;
   }
