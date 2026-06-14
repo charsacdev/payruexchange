@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile — PayruExchange Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/datatable-theme.css" />
+</head>
+<body data-page="users" data-title="User Profile" data-subtitle="Full account overview, transaction history and account controls.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <a href="users.html" class="link back-link"><i class='bx bx-arrow-back'></i> Back to Users</a>
+
+        <div id="notFound" class="empty-state" style="display:none;">
+          <i class='bx bx-user-x'></i>
+          <h4>User not found</h4>
+          <p>This user may have been removed.</p>
+        </div>
+
+        <div id="profileContent">
+          <!-- ===== Profile header ===== -->
+          <div class="card profile-header" id="profileHeader"></div>
+
+          <!-- ===== Stat cards ===== -->
+          <div class="grid stats-grid stats-grid-4" id="profileStats"></div>
+
+          <!-- ===== Columns ===== -->
+          <div class="dashboard-cols">
+            <!-- Left: transaction history -->
+            <div class="card">
+              <div class="card-head"><h3>Transaction History</h3></div>
+
+              <div class="table-wrap" id="txnTableWrap">
+                <table class="data-table" id="txnTable">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Date</th>
+                      <th>Type</th>
+                      <th>Asset</th>
+                      <th>Amount (USD)</th>
+                      <th>Amount (NGN)</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="txnBody"></tbody>
+                </table>
+              </div>
+
+              <div class="empty-state" id="txnEmpty" style="display:none;">
+                <i class='bx bx-receipt'></i>
+                <h4>No transactions yet</h4>
+                <p>This user hasn't made any buy or sell orders.</p>
+              </div>
+            </div>
+
+            <!-- Right: account controls -->
+            <div>
+              <div class="card" style="margin-bottom: 24px;" id="accountActionsCard"></div>
+              <div class="card" style="margin-bottom: 24px;" id="kycCard"></div>
+              <div class="card" style="margin-bottom: 24px;" id="bankCard"></div>
+              <div class="card" style="margin-bottom: 24px;" id="walletCard"></div>
+              <div class="card" id="deviceCard"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="../js/datatable.js"></script>
+  <script src="../js/admin-user-detail.js"></script>
+</body>
+</html>

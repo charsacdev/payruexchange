@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 470" role="img" aria-label="Illustration of a happy woman smiling while using the PayruExchange app on her phone">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B2440"/>
+      <stop offset="1" stop-color="#0A0E1A"/>
+    </linearGradient>
+    <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00E0A8"/>
+      <stop offset="1" stop-color="#7C6CF6"/>
+    </linearGradient>
+    <radialGradient id="glowTeal" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#00E0A8" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#00E0A8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#7C6CF6" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#7C6CF6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dotGrid" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#3A4668" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="470" fill="url(#bgGrad)"/>
+  <circle cx="340" cy="70" r="170" fill="url(#glowTeal)"/>
+  <circle cx="40" cy="440" r="190" fill="url(#glowPurple)"/>
+  <rect x="230" y="20" width="150" height="150" fill="url(#dotGrid)"/>
+
+  <!-- Torso / clothing -->
+  <path d="M55 470 V392 C55 330 105 305 150 305 H250 C295 305 345 330 345 392 V470 Z" fill="#FF8F6B"/>
+  <path d="M250 305 C295 305 345 330 345 392 V470 H300 V395 C300 348 282 318 250 309 Z" fill="#E87C56" opacity="0.55"/>
+
+  <!-- Neck -->
+  <rect x="180" y="270" width="40" height="50" rx="8" fill="#C68A5C"/>
+
+  <!-- Hair back / halo -->
+  <ellipse cx="200" cy="195" rx="80" ry="85" fill="#2B1B12"/>
+  <circle cx="118" cy="160" r="18" fill="#2B1B12"/>
+  <circle cx="130" cy="118" r="16" fill="#2B1B12"/>
+  <circle cx="165" cy="92" r="18" fill="#2B1B12"/>
+  <circle cx="200" cy="82" r="20" fill="#2B1B12"/>
+  <circle cx="235" cy="92" r="18" fill="#2B1B12"/>
+  <circle cx="270" cy="118" r="16" fill="#2B1B12"/>
+  <circle cx="282" cy="160" r="18" fill="#2B1B12"/>
+
+  <!-- Head -->
+  <ellipse cx="200" cy="215" rx="60" ry="62" fill="#C68A5C"/>
+
+  <!-- Earrings -->
+  <circle cx="140" cy="222" r="5" fill="#00E0A8"/>
+  <circle cx="260" cy="222" r="5" fill="#00E0A8"/>
+
+  <!-- Eyebrows -->
+  <path d="M168 195 Q178 188 190 193" stroke="#5C3A22" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M210 193 Q222 188 232 195" stroke="#5C3A22" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- Eyes -->
+  <circle cx="180" cy="208" r="6" fill="#2B1B12"/>
+  <circle cx="220" cy="208" r="6" fill="#2B1B12"/>
+
+  <!-- Blush -->
+  <ellipse cx="172" cy="230" rx="12" ry="7" fill="#FF8F6B" opacity="0.5"/>
+  <ellipse cx="228" cy="230" rx="12" ry="7" fill="#FF8F6B" opacity="0.5"/>
+
+  <!-- Smile -->
+  <path d="M178 232 Q200 258 222 232 Q224 252 200 252 Q176 252 178 232 Z" fill="#7A4530"/>
+  <path d="M183 235 Q200 248 217 235 L217 240 Q200 250 183 240 Z" fill="#FFFFFF"/>
+
+  <!-- Arms -->
+  <path d="M150 320 C124 330 109 366 117 400 L148 407 C148 379 152 345 162 322 Z" fill="#FF8F6B"/>
+  <path d="M250 320 C276 330 291 366 283 400 L252 407 C252 379 248 345 238 322 Z" fill="#FF8F6B"/>
+  <ellipse cx="132" cy="403" rx="16" ry="14" fill="#C68A5C"/>
+  <ellipse cx="268" cy="403" rx="16" ry="14" fill="#C68A5C"/>
+
+  <!-- Phone -->
+  <rect x="158" y="295" width="84" height="165" rx="16" fill="#1E2740" stroke="#3A4668" stroke-width="2"/>
+  <rect x="166" y="307" width="68" height="132" rx="8" fill="#0A0E1A"/>
+  <rect x="190" y="300" width="20" height="4" rx="2" fill="#3A4668"/>
+
+  <!-- Phone screen content -->
+  <circle cx="200" cy="345" r="24" fill="url(#brandGrad)"/>
+  <path d="M188 345 L197 354 L213 336" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="178" y="385" width="44" height="6" rx="3" fill="#2E3A5C"/>
+  <rect x="178" y="398" width="32" height="6" rx="3" fill="#2E3A5C"/>
+  <rect x="178" y="411" width="40" height="6" rx="3" fill="#2E3A5C"/>
+  <rect x="178" y="424" width="26" height="6" rx="3" fill="#2E3A5C"/>
+
+  <!-- Floating "secure" card -->
+  <g>
+    <rect x="14" y="36" width="132" height="56" rx="14" fill="#141B30" stroke="url(#brandGrad)" stroke-width="1.5"/>
+    <circle cx="42" cy="64" r="17" fill="#00E0A8" opacity="0.15"/>
+    <path d="M42 52 L52 56 V65 C52 73 47 79 42 81 C37 79 32 73 32 65 V56 Z" fill="#00E0A8"/>
+    <path d="M37 65 L41 69 L48 60" stroke="#0A0E1A" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="66" y="55" width="64" height="6" rx="3" fill="#3A4668"/>
+    <rect x="66" y="69" width="46" height="6" rx="3" fill="#2E3A5C"/>
+  </g>
+
+  <!-- Floating lock badge -->
+  <g>
+    <circle cx="352" cy="120" r="30" fill="url(#brandGrad)"/>
+    <path d="M344 116 V109 C344 103 348 99 352 99 C356 99 360 103 360 109 V116" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="340" y="116" width="24" height="18" rx="3" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Naira badge -->
+  <g>
+    <circle cx="304" cy="432" r="24" fill="#1E2740" stroke="#00E0A8" stroke-width="2"/>
+    <text x="304" y="440" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#00E0A8" text-anchor="middle">₦</text>
+  </g>
+
+  <!-- Sparkles -->
+  <path d="M95 60 L98 70 L108 73 L98 76 L95 86 L92 76 L82 73 L92 70 Z" fill="#FFD27A"/>
+  <path d="M324 235 L327 244 L336 247 L327 250 L324 259 L321 250 L312 247 L321 244 Z" fill="#00E0A8"/>
+  <path d="M76 280 L78 286 L84 288 L78 290 L76 296 L74 290 L68 288 L74 286 Z" fill="#7C6CF6"/>
+</svg>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users — PayruExchange Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/datatable-theme.css" />
+</head>
+<body data-page="users" data-title="Users" data-subtitle="View all registered accounts on the platform.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <div class="card">
+          <div class="filter-bar">
+            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search by name or email..." />
+            <select id="statusFilter" class="form-control">
+              <option value="all">All KYC Statuses</option>
+              <option value="verified">Verified</option>
+              <option value="pending">Pending Review</option>
+              <option value="rejected">Rejected</option>
+              <option value="unverified">Unverified</option>
+            </select>
+          </div>
+
+          <div class="table-wrap" id="usersTableWrap">
+            <table class="data-table" id="usersTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>User</th>
+                  <th>Phone</th>
+                  <th>KYC Status</th>
+                  <th>Account Status</th>
+                  <th>Wallet Balance</th>
+                  <th>Joined</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="usersBody"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="usersEmpty" style="display:none;">
+            <i class='bx bx-group'></i>
+            <h4>No users found</h4>
+            <p>There's nothing to show for this filter right now.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="../js/datatable.js"></script>
+  <script src="../js/admin-users.js"></script>
+</body>
+</html>

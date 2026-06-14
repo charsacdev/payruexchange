@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PayruExchange — Buy &amp; Sell Crypto Instantly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">P</div>
+        <span>Payru<span>Exchange</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="privacy-policy.html">Privacy</a>
+      </nav>
+      <div class="nav-actions" id="navActions">
+        <a href="login.html" class="btn btn-ghost">Log In</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+        <button class="nav-toggle" id="navToggle"><i class='bx bx-menu'></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text fade-up">
+        <div class="section-tag"><i class='bx bx-shield-quarter'></i> Buy &amp; Sell Crypto Securely</div>
+        <h1>Buy &amp; Sell Crypto. Get Paid in <span class="text-gradient">Naira</span> — Instantly.</h1>
+        <p class="lead">PayruExchange lets you buy Bitcoin, USDT, Ethereum and more with Naira, or sell your crypto for cash paid straight to your bank account in minutes. No long waits, no hidden fees.</p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary btn-lg"><i class='bx bx-rocket'></i> Create Free Account</a>
+          <a href="#how-it-works" class="btn btn-outline btn-lg"><i class='bx bx-play-circle'></i> How It Works</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>50K+</strong>
+            <span>Active Users</span>
+          </div>
+          <div class="stat">
+            <strong>₦12B+</strong>
+            <span>Processed Payouts</span>
+          </div>
+          <div class="stat">
+            <strong>&lt; 15 min</strong>
+            <span>Average Payout Time</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual fade-up">
+        <div class="rate-carousel" id="rateCarousel">
+          <div class="rate-carousel-head">
+            <span class="rate-carousel-label"><i class='bx bx-pulse'></i> Live Market Rates</span>
+            <span class="rate-carousel-live"><span class="live-dot"></span> Live</span>
+          </div>
+          <div class="rate-carousel-viewport">
+            <div class="rate-carousel-track" id="rateTrack"></div>
+          </div>
+          <div class="rate-carousel-dots" id="rateDots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Live Rate Ticker ===== -->
+  <section class="ticker-section">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </section>
+
+  <!-- ===== How It Works ===== -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag"><i class='bx bx-list-ol'></i> Simple Process</div>
+        <h2>How PayruExchange Works</h2>
+        <p>Cash out your crypto in four simple steps — fast, secure, and transparent.</p>
+      </div>
+      <div class="grid steps-grid">
+        <div class="step-card fade-up">
+          <div class="step-number">1</div>
+          <h3>Create &amp; Verify Account</h3>
+          <p>Sign up in seconds and complete a quick KYC check using your NIN, Voter's Card or other valid ID.</p>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-number">2</div>
+          <h3>Enter Amount &amp; Select Asset</h3>
+          <p>Tell us how much you want to sell in USD, view the live exchange rate, and choose your crypto asset.</p>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-number">3</div>
+          <h3>Send Your Crypto</h3>
+          <p>We generate a secure deposit address for you. Send your crypto and we'll notify you the moment it's received.</p>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-number">4</div>
+          <h3>Get Paid to Your Bank</h3>
+          <p>Add your bank account details and receive your Naira payout directly — fast and automatic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section class="section" id="features" style="background: var(--bg-soft);">
+    <div class="container">
+      <div class="grid features-split">
+        <div class="features-image fade-up">
+          <img src="assets/images/happy-customer-app.svg" alt="Illustration of a happy woman smiling while using the PayruExchange app on her phone" loading="lazy" />
+          <div class="features-image-badge">
+            <i class='bx bx-shield-check'></i>
+            <div>
+              <strong>Bank-Grade Security</strong>
+              <span>256-bit encryption on every transaction</span>
+            </div>
+          </div>
+        </div>
+        <div class="features-content fade-up">
+          <div class="section-tag"><i class='bx bx-star'></i> Why PayruExchange</div>
+          <h2>Built for Speed, Security &amp; Trust</h2>
+          <p class="lead-sm">Everything you need to buy and sell digital assets, without the stress.</p>
+          <div class="features-list">
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-bolt-circle'></i></div>
+              <div>
+                <h3>Lightning Fast Payouts</h3>
+                <p>Once your deposit is confirmed, payouts to your bank account are processed within minutes.</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-line-chart'></i></div>
+              <div>
+                <h3>Competitive Rates</h3>
+                <p>Get real-time exchange rates with no hidden charges — see exactly what you'll receive upfront.</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-coin-stack'></i></div>
+              <div>
+                <h3>Multiple Assets</h3>
+                <p>Buy and sell Bitcoin, Ethereum, USDT, BNB, USDC and more — all from a single dashboard.</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-bell'></i></div>
+              <div>
+                <h3>Real-Time Notifications</h3>
+                <p>Track every step of your transaction with instant updates on deposits and payouts.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Testimonials ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag"><i class='bx bx-chat'></i> Testimonials</div>
+        <h2>Trusted by Thousands of Users</h2>
+        <p>Here's what our community has to say about PayruExchange.</p>
+      </div>
+      <div class="testimonial-slider">
+        <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="avatar">CO</div>
+              <div class="testimonial-meta">
+                <strong>Chidi Okeke <i class='bx bxs-badge-check'></i></strong>
+                <span>Lagos, Nigeria · 2 weeks ago</span>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <p>"I sold my USDT and had the money in my GTBank account in under 10 minutes. Super smooth process!"</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="avatar">FB</div>
+              <div class="testimonial-meta">
+                <strong>Funmi Bello <i class='bx bxs-badge-check'></i></strong>
+                <span>Abuja, Nigeria · 1 month ago</span>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <p>"The rates are way better than what I was getting elsewhere, and the KYC process was painless."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="avatar">TA</div>
+              <div class="testimonial-meta">
+                <strong>Tunde Adeyemi <i class='bx bxs-badge-check'></i></strong>
+                <span>Port Harcourt, Nigeria · 3 days ago</span>
+              </div>
+              <div class="testimonial-stars">★★★★☆</div>
+            </div>
+            <p>"Customer support responded almost immediately when I had a question about my payout. Highly recommend."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="avatar">NE</div>
+              <div class="testimonial-meta">
+                <strong>Ngozi Eze <i class='bx bxs-badge-check'></i></strong>
+                <span>Enugu, Nigeria · 5 days ago</span>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <p>"I was skeptical at first, but PayruExchange's rates beat every other platform I tried. Now it's the only place I cash out."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="avatar">BM</div>
+              <div class="testimonial-meta">
+                <strong>Bashir Mohammed <i class='bx bxs-badge-check'></i></strong>
+                <span>Kano, Nigeria · 1 week ago</span>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <p>"As a freelancer paid in crypto, PayruExchange makes converting to Naira effortless. Clean interface, fast payouts."</p>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-btn" id="testimonialPrev" aria-label="Previous testimonial"><i class='bx bx-chevron-left'></i></button>
+          <div class="slider-dots" id="testimonialDots"></div>
+          <button class="slider-btn" id="testimonialNext" aria-label="Next testimonial"><i class='bx bx-chevron-right'></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="faq" style="background: var(--bg-soft);">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag"><i class='bx bx-help-circle'></i> FAQ</div>
+        <h2>Frequently Asked Questions</h2>
+        <p>Can't find the answer you're looking for? Reach out to our support team.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <div class="faq-question">
+            Can I buy crypto on PayruExchange, or only sell?
+            <i class='bx bx-chevron-down'></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">You can do both. Fund your account with Naira to buy Bitcoin, USDT, Ethereum and other supported assets at competitive rates, or sell your crypto for an instant payout to your bank account — all from the same dashboard.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            How do I sell my crypto on PayruExchange?
+            <i class='bx bx-chevron-down'></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Create an account, complete your KYC verification, then head to your dashboard and click "Sell Crypto." Enter the amount you want to sell, choose your asset, and follow the prompts to send your crypto and receive your payout.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            What identification documents do I need?
+            <i class='bx bx-chevron-down'></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">You can verify your identity using your National ID Number (NIN), Voter's Card (PVC), Driver's License or International Passport.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            How long does a payout take?
+            <i class='bx bx-chevron-down'></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Once your crypto deposit is confirmed and your bank details are submitted, payouts are typically processed within 15 minutes during business hours.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Which cryptocurrencies are supported?
+            <i class='bx bx-chevron-down'></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">We currently support Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB and USD Coin (USDC), with more assets being added regularly.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Are there any fees?
+            <i class='bx bx-chevron-down'></i>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Our exchange rate already reflects our service fee — the amount you see at checkout is exactly what you'll receive, with no surprise deductions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner fade-up">
+        <h2>Ready to buy or sell crypto?</h2>
+        <p>Join thousands of users who trust PayruExchange to buy and sell crypto quickly, securely, and at competitive rates.</p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn btn-primary btn-lg"><i class='bx bx-user-plus'></i> Create Free Account</a>
+          <a href="login.html" class="btn btn-outline btn-lg">Log In</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="index.html" class="logo">
+            <div class="logo-mark">P</div>
+            <span>Payru<span>Exchange</span></span>
+          </a>
+          <p>PayruExchange is a fast, secure platform for buying and selling crypto, with payouts paid directly to your bank account.</p>
+          <div class="social-row">
+            <a href="#"><i class='bx bxl-twitter'></i></a>
+            <a href="#"><i class='bx bxl-telegram'></i></a>
+            <a href="#"><i class='bx bxl-instagram'></i></a>
+            <a href="#"><i class='bx bxl-facebook'></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Account</h4>
+          <ul class="footer-links">
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="register.html">Create Account</a></li>
+            <li><a href="forgot-password.html">Forgot Password</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 PayruExchange. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

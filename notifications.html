@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications — PayruExchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body data-page="notifications" data-title="Notifications" data-subtitle="Stay up to date on your deposits, payouts and account activity.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <div class="kyc-banner" id="kycBanner" style="display:none;"></div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>All Notifications</h3>
+            <button class="link" id="markAllReadBtn"><i class='bx bx-check-double'></i> Mark all as read</button>
+          </div>
+
+          <div class="notif-list" id="notifList"></div>
+
+          <div class="datatable-pagination" id="notifPagination"></div>
+
+          <div class="empty-state" id="notifEmpty" style="display:none;">
+            <i class='bx bx-bell-off'></i>
+            <h4>No notifications yet</h4>
+            <p>We'll let you know here when something happens with your account.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/datatable.js"></script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>

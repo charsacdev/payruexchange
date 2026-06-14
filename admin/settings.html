@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — PayruExchange Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+</head>
+<body data-page="settings" data-title="Settings" data-subtitle="Manage your admin profile, password and platform exchange rates.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <div class="dashboard-cols">
+          <!-- ===== Left column ===== -->
+          <div>
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-head"><h3>Personal Information</h3></div>
+              <form id="personalForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="firstName">First Name</label>
+                    <input type="text" id="firstName" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="lastName">Last Name</label>
+                    <input type="text" id="lastName" class="form-control" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Email Address</label>
+                  <input type="email" id="email" class="form-control" disabled />
+                  <div class="form-hint">Your email address cannot be changed.</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone Number</label>
+                  <input type="tel" id="phone" class="form-control" placeholder="+234..." required />
+                </div>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Save Changes</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h3>Change Password</h3></div>
+              <form id="passwordForm">
+                <div class="form-group">
+                  <label class="form-label" for="currentPassword">Current Password</label>
+                  <div class="input-wrap">
+                    <input type="password" id="currentPassword" class="form-control" placeholder="Enter current password" />
+                    <button type="button" class="input-icon-btn toggle-password" data-target="currentPassword" aria-label="Toggle password visibility">
+                      <i class='bx bx-show'></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="newPassword">New Password</label>
+                  <div class="input-wrap">
+                    <input type="password" id="newPassword" class="form-control" placeholder="Create a new password" />
+                    <button type="button" class="input-icon-btn toggle-password" data-target="newPassword" aria-label="Toggle password visibility">
+                      <i class='bx bx-show'></i>
+                    </button>
+                  </div>
+                  <div class="pw-strength" id="pwStrength"><i></i><i></i><i></i></div>
+                  <div class="form-hint">Use at least 8 characters, with a number and a symbol for a stronger password.</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="confirmNewPassword">Confirm New Password</label>
+                  <div class="input-wrap">
+                    <input type="password" id="confirmNewPassword" class="form-control" placeholder="Re-enter new password" />
+                    <button type="button" class="input-icon-btn toggle-password" data-target="confirmNewPassword" aria-label="Toggle password visibility">
+                      <i class='bx bx-show'></i>
+                    </button>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-lock-alt'></i> Update Password</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- ===== Right column ===== -->
+          <div>
+            <div class="card">
+              <div class="card-head"><h3>Exchange Rates</h3></div>
+              <form id="ratesForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="buyRate">Buy Rate (₦ per $1)</label>
+                    <input type="number" id="buyRate" class="form-control" min="1" step="1" inputmode="numeric" />
+                    <div class="form-hint">Rate charged when users buy crypto from the platform.</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="sellRate">Sell Rate (₦ per $1)</label>
+                    <input type="number" id="sellRate" class="form-control" min="1" step="1" inputmode="numeric" />
+                    <div class="form-hint">Rate paid out when users sell crypto to the platform.</div>
+                  </div>
+                </div>
+                <div class="notice-box notice-info">
+                  <i class='bx bx-info-circle'></i>
+                  <span>Current spread (platform margin): <strong id="rateSpread">₦0</strong> per $1</span>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Update Rates</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/admin-settings.js"></script>
+</body>
+</html>

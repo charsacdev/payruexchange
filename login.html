@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log In — PayruExchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+  <div class="auth-page">
+    <!-- ===== Branding Panel ===== -->
+    <div class="auth-panel">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">P</div>
+        <span>Payru<span>Exchange</span></span>
+      </a>
+
+      <div class="auth-panel-content">
+        <h1>Welcome back. Your crypto-to-cash dashboard awaits.</h1>
+        <p>Log in to check your wallet balance, track your transactions, and cash out your crypto in minutes.</p>
+
+        <div class="auth-feature-list">
+          <div class="auth-feature">
+            <div class="feature-icon"><i class='bx bx-wallet'></i></div>
+            <div>
+              <h4>Track Your Wallet</h4>
+              <p>View your balance, deposits and withdrawals at a glance.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="feature-icon"><i class='bx bx-bolt-circle'></i></div>
+            <div>
+              <h4>Fast Payouts</h4>
+              <p>Sell crypto and receive your Naira payout in minutes.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="feature-icon"><i class='bx bx-shield-quarter'></i></div>
+            <div>
+              <h4>Secure &amp; Verified</h4>
+              <p>Your account is protected with KYC-backed verification.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-panel-footer">&copy; 2026 PayruExchange. All rights reserved.</div>
+    </div>
+
+    <!-- ===== Form Side ===== -->
+    <div class="auth-form-side">
+      <div class="auth-card">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">P</div>
+          <span>Payru<span>Exchange</span></span>
+        </a>
+
+        <h2>Log In</h2>
+        <p>Enter your details to access your account.</p>
+
+        <div class="demo-hint">
+          <i class='bx bx-info-circle'></i>
+          <div>
+            <strong>Demo accounts</strong><br>
+            User: demo@payruexchange.com / Demo123!<br>
+            Admin: admin@payruexchange.com / Admin123!
+          </div>
+        </div>
+
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="password" class="form-control" placeholder="Enter your password" required />
+              <button type="button" class="input-icon-btn toggle-password" data-target="password" aria-label="Toggle password visibility">
+                <i class='bx bx-show'></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-between" style="margin-bottom: 24px;">
+            <label class="checkbox-row" style="margin-bottom:0;">
+              <input type="checkbox" id="remember" />
+              <span>Remember me</span>
+            </label>
+            <a href="forgot-password.html" style="font-size:14px; color: var(--primary); font-weight:600;">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            <i class='bx bx-log-in'></i> Log In
+          </button>
+        </form>
+
+        <p class="auth-switch">Don't have an account? <a href="register.html">Create one for free</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

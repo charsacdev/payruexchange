@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transactions — PayruExchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/datatable-theme.css" />
+</head>
+<body data-page="transactions" data-title="Transactions" data-subtitle="View and track all your buy and sell orders.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <div class="kyc-banner" id="kycBanner" style="display:none;"></div>
+
+        <div class="card">
+          <div class="filter-bar">
+            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search by asset or transaction ID..." />
+            <select id="statusFilter" class="form-control">
+              <option value="all">All Statuses</option>
+              <option value="pending_deposit">Awaiting Deposit</option>
+              <option value="awaiting_confirmation">Confirming Deposit</option>
+              <option value="deposit_confirmed">Awaiting Bank Details</option>
+              <option value="processing_payout">Processing Payout</option>
+              <option value="pending_payment">Awaiting Payment</option>
+              <option value="awaiting_payment_confirmation">Confirming Payment</option>
+              <option value="processing_crypto_payout">Processing Crypto Payout</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="table-wrap" id="txnTableWrap">
+            <table class="data-table" id="txnTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date</th>
+                  <th>Asset</th>
+                  <th>Amount (USD)</th>
+                  <th>Amount (NGN)</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="txnBody"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="txnEmpty" style="display:none;">
+            <i class='bx bx-receipt'></i>
+            <h4>No transactions found</h4>
+            <p>Try adjusting your filters, or start a new buy or sell order.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== Transaction Detail Modal ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Transaction Details</h3>
+        <button class="modal-close" id="modalClose"><i class='bx bx-x'></i></button>
+      </div>
+      <div class="detail-list" id="modalBody"></div>
+      <div class="modal-actions">
+        <a href="#" class="btn btn-primary" id="modalContinueBtn" style="display:none;"><i class='bx bx-right-arrow-alt'></i> Continue</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="js/datatable.js"></script>
+  <script src="js/transactions.js"></script>
+</body>
+</html>

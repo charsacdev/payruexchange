@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — PayruExchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/datatable-theme.css" />
+</head>
+<body data-page="dashboard" data-title="Admin Dashboard" data-subtitle="Overview of platform activity, KYC submissions and pending transactions.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+
+        <!-- ===== Stat cards ===== -->
+        <div class="grid stats-grid">
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-primary"><i class='bx bx-group'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Users</div>
+              <div class="stat-value" id="statTotalUsers">0</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-warning"><i class='bx bx-id-card'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Pending KYC</div>
+              <div class="stat-value" id="statPendingKYC">0</div>
+              <div class="stat-sub">Awaiting review</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-success"><i class='bx bx-check-shield'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Verified Users</div>
+              <div class="stat-value" id="statVerifiedUsers">0</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-info"><i class='bx bx-download'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Pending Deposits</div>
+              <div class="stat-value" id="statPendingDeposits">0</div>
+              <div class="stat-sub">Awaiting confirmation</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-accent"><i class='bx bx-upload'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Pending Payouts</div>
+              <div class="stat-value" id="statPendingPayouts">0</div>
+              <div class="stat-sub">Processing</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-success"><i class='bx bx-trending-down'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Deposit Volume</div>
+              <div class="stat-value" id="statTotalDepositVolume">₦0</div>
+              <div class="stat-sub">Lifetime, all users</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-danger"><i class='bx bx-trending-up'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Withdrawal Volume</div>
+              <div class="stat-value" id="statTotalWithdrawalVolume">₦0</div>
+              <div class="stat-sub">Lifetime, all users</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Columns ===== -->
+        <div class="dashboard-cols">
+          <div class="card">
+            <div class="card-head">
+              <h3>Recent Transactions</h3>
+            </div>
+
+            <div class="table-wrap" id="recentTxnTableWrap">
+              <table class="data-table" id="recentTxnTable">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Asset</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="recentTxnBody"></tbody>
+              </table>
+            </div>
+
+            <div class="empty-state" id="recentTxnEmpty" style="display:none;">
+              <i class='bx bx-receipt'></i>
+              <h4>No transactions yet</h4>
+              <p>User transactions will appear here once they start selling crypto.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Quick Actions</h3></div>
+            <div class="quick-actions">
+              <a href="kyc.html" class="quick-action">
+                <div class="stat-icon icon-warning"><i class='bx bx-id-card'></i></div>
+                <div>
+                  <strong>Review KYC Submissions</strong>
+                  <span>Approve or reject identity verification</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+              <a href="deposits.html" class="quick-action">
+                <div class="stat-icon icon-info"><i class='bx bx-download'></i></div>
+                <div>
+                  <strong>Confirm Deposits</strong>
+                  <span>Review and confirm incoming crypto deposits</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+              <a href="withdrawals.html" class="quick-action">
+                <div class="stat-icon icon-accent"><i class='bx bx-upload'></i></div>
+                <div>
+                  <strong>Process Payouts</strong>
+                  <span>Mark bank payouts as completed</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+              <a href="users.html" class="quick-action">
+                <div class="stat-icon icon-primary"><i class='bx bx-group'></i></div>
+                <div>
+                  <strong>Manage Users</strong>
+                  <span>View all registered accounts</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="../js/datatable.js"></script>
+  <script src="../js/admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — PayruExchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/datatable-theme.css" />
+</head>
+<body data-page="dashboard" data-title="Dashboard" data-subtitle="Welcome back! Here's an overview of your account.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <div class="kyc-banner" id="kycBanner" style="display:none;"></div>
+
+        <!-- ===== Stat cards ===== -->
+        <div class="grid stats-grid">
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-primary"><i class='bx bx-wallet'></i></div>
+              <button class="eye-toggle" id="eyeToggle" title="Show/hide balances"><i class='bx bx-show'></i></button>
+            </div>
+            <div>
+              <div class="stat-label">Available Balance</div>
+              <div class="stat-value balance-value" id="statBalance" data-value="₦0">₦0</div>
+            </div>
+            <button class="btn btn-primary btn-sm" id="fundWalletBtn"><i class='bx bx-add-to-queue'></i> Fund Wallet</button>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-success"><i class='bx bx-download'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Deposits</div>
+              <div class="stat-value balance-value" id="statDeposits" data-value="₦0">₦0</div>
+              <div class="stat-sub">Lifetime crypto sold</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-accent"><i class='bx bx-upload'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Withdrawals</div>
+              <div class="stat-value balance-value" id="statWithdrawals" data-value="₦0">₦0</div>
+              <div class="stat-sub">Lifetime payouts</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Columns ===== -->
+        <div class="dashboard-cols">
+          <div class="card">
+            <div class="card-head">
+              <h3>Recent Transactions</h3>
+              <a href="transactions.html" class="link">View All</a>
+            </div>
+
+            <div class="table-wrap" id="recentTxnTableWrap">
+              <table class="data-table" id="recentTxnTable">
+                <thead>
+                  <tr>
+                    <th>Asset</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="recentTxnBody"></tbody>
+              </table>
+            </div>
+
+            <div class="empty-state" id="recentTxnEmpty" style="display:none;">
+              <i class='bx bx-receipt'></i>
+              <h4>No transactions yet</h4>
+              <p>Your transaction history will appear here once you sell crypto.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Quick Actions</h3></div>
+            <div class="quick-actions">
+              <a href="buy.html" class="quick-action">
+                <div class="stat-icon icon-success"><i class='bx bx-wallet'></i></div>
+                <div>
+                  <strong>Buy Crypto</strong>
+                  <span>Convert your Naira to crypto</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+              <a href="sell.html" class="quick-action">
+                <div class="stat-icon icon-primary"><i class='bx bx-coin-stack'></i></div>
+                <div>
+                  <strong>Sell Crypto</strong>
+                  <span>Convert your crypto to Naira</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+              <a href="transactions.html" class="quick-action">
+                <div class="stat-icon icon-info"><i class='bx bx-receipt'></i></div>
+                <div>
+                  <strong>Transaction History</strong>
+                  <span>View all your past transactions</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+              <a href="profile.html" class="quick-action">
+                <div class="stat-icon icon-accent"><i class='bx bx-bank'></i></div>
+                <div>
+                  <strong>Payout Account</strong>
+                  <span>Manage your bank account details</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+              <a href="notifications.html" class="quick-action">
+                <div class="stat-icon icon-warning"><i class='bx bx-bell'></i></div>
+                <div>
+                  <strong>Notifications</strong>
+                  <span>Check updates on your transactions</span>
+                </div>
+                <i class='bx bx-chevron-right'></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== Fund Wallet Modal ===== -->
+  <div class="modal-overlay" id="fundModalOverlay">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Fund Your Wallet</h3>
+        <button class="modal-close" id="fundModalClose"><i class='bx bx-x'></i></button>
+      </div>
+      <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">
+        Transfer any amount to your dedicated virtual account below. Your wallet balance updates automatically once the transfer is received.
+      </p>
+      <div class="form-group">
+        <label class="form-label">Bank Name</label>
+        <div class="copy-field">
+          <span id="vaBankName"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Account Number</label>
+        <div class="copy-field">
+          <span id="vaAccountNumber"></span>
+          <button id="vaCopyAccountBtn"><i class='bx bx-copy'></i> Copy</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Account Name</label>
+        <div class="copy-field">
+          <span id="vaAccountName"></span>
+        </div>
+      </div>
+      <div class="notice-box">
+        <i class='bx bx-info-circle'></i>
+        <span>This virtual account number is unique to you. Use it as many times as you like to fund your wallet.</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="js/datatable.js"></script>
+  <script src="js/dashboard-page.js"></script>
+</body>
+</html>

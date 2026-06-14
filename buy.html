@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Crypto — PayruExchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body data-page="buy" data-title="Buy Crypto" data-subtitle="Buy crypto with Naira, paid directly to your wallet.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <div class="kyc-banner" id="kycBanner" style="display:none;"></div>
+
+        <!-- ===== KYC required block ===== -->
+        <div id="kycRequired" class="card kyc-status-card" style="display:none;">
+          <div class="feature-icon"><i class='bx bx-id-card'></i></div>
+          <h2>Verify Your Identity First</h2>
+          <p>You need to complete KYC verification before you can buy crypto on PayruExchange.</p>
+          <a href="kyc.html" class="btn btn-primary btn-lg"><i class='bx bx-check-shield'></i> Complete KYC</a>
+        </div>
+
+        <!-- ===== Buy flow ===== -->
+        <div id="buyFlow">
+          <div class="stepper" id="stepper">
+            <div class="stepper-step" data-step="1"><div class="step-circle">1</div> Amount</div>
+            <div class="stepper-line"></div>
+            <div class="stepper-step" data-step="2"><div class="step-circle">2</div> Details</div>
+            <div class="stepper-line"></div>
+            <div class="stepper-step" data-step="3"><div class="step-circle">3</div> Payment</div>
+          </div>
+
+          <div class="card sell-card">
+
+            <!-- Step 1: Amount -->
+            <div id="screenAmount">
+              <h3 style="margin-bottom:6px;">How much crypto do you want to buy?</h3>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Enter the amount in USD worth of crypto you'd like to purchase.</p>
+
+              <div class="mockup-total" style="margin-bottom:24px;">
+                <label>Your Available Balance</label>
+                <strong id="walletBalanceDisplay">₦0</strong>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="amountUSD">Amount (USD)</label>
+                <div class="input-wrap has-prefix">
+                  <span class="input-prefix">$</span>
+                  <input type="number" id="amountUSD" class="form-control" placeholder="0.00" min="10" step="0.01" />
+                </div>
+                <div class="form-hint">Minimum amount: $10.00</div>
+              </div>
+
+              <div class="mockup-rate" style="margin-bottom:24px;">
+                <i class='bx bx-trending-up'></i> Exchange Rate: 1 USD = ₦<span id="rateDisplay"></span>
+              </div>
+
+              <div class="mockup-total" style="margin-bottom:24px;">
+                <label>You'll pay</label>
+                <strong id="ngnPreview">₦0</strong>
+              </div>
+
+              <button class="btn btn-primary btn-block btn-lg" id="toAssetBtn">Continue <i class='bx bx-right-arrow-alt'></i></button>
+            </div>
+
+            <!-- Step 2: Asset selection + wallet address -->
+            <div id="screenAsset" style="display:none;">
+              <h3 style="margin-bottom:6px;">Select an asset &amp; wallet address</h3>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Choose the cryptocurrency you'd like to receive, and tell us where to send it.</p>
+
+              <div class="asset-option-grid" id="assetGrid"></div>
+
+              <div class="form-group" style="margin-top:24px;">
+                <label class="form-label" for="walletAddress">Your Wallet Address (<span id="walletNetworkLabel">select an asset</span>)</label>
+                <input type="text" id="walletAddress" class="form-control" placeholder="Paste the wallet address you want your crypto sent to" />
+                <div class="form-hint">Double-check this address before continuing. Sending to the wrong network may result in permanent loss of funds.</div>
+              </div>
+
+              <div class="flex" style="gap:12px; margin-top:24px;">
+                <button class="btn btn-secondary btn-icon" id="backToAmountBtn"><i class='bx bx-arrow-back'></i></button>
+                <button class="btn btn-primary btn-block btn-lg" id="toPaymentBtn" disabled>Continue <i class='bx bx-right-arrow-alt'></i></button>
+              </div>
+            </div>
+
+            <!-- Step 2b: Payment -->
+            <div id="screenPayment" style="display:none;">
+              <h3 style="margin-bottom:6px; text-align:center;">Pay for your order</h3>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px; text-align:center;">Transfer the exact amount below to our bank account. We'll confirm your payment and process your crypto.</p>
+
+              <div class="deposit-amount-display">
+                <div class="coin-icon lg" data-asset="NGN">₦</div>
+                <div class="big-amount" id="paymentAmount"></div>
+                <div class="sub-amount" id="paymentAmountSub"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Bank Name</label>
+                <div class="copy-field">
+                  <span id="paymentBankName"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Account Number</label>
+                <div class="copy-field">
+                  <span id="paymentAccountNumber"></span>
+                  <button id="copyAccountBtn"><i class='bx bx-copy'></i> Copy</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Account Name</label>
+                <div class="copy-field">
+                  <span id="paymentAccountName"></span>
+                </div>
+              </div>
+
+              <div class="notice-box">
+                <i class='bx bx-error'></i>
+                <span>Transfer the exact amount shown above from your own bank account. Payments from a different account name may delay confirmation.</span>
+              </div>
+
+              <button class="btn btn-primary btn-block btn-lg" id="paidBtn"><i class='bx bx-check-double'></i> I've Made The Payment</button>
+              <button class="btn btn-ghost btn-block" id="cancelOrderBtn1" style="margin-top:10px;">Cancel Order</button>
+            </div>
+
+            <!-- Step 2c: Confirming -->
+            <div id="screenConfirming" style="display:none; text-align:center;">
+              <div class="success-icon" style="background: var(--info-soft); color: var(--info);"><i class='bx bx-loader-alt'></i></div>
+              <h3 style="margin-bottom:8px;">Awaiting Payment Confirmation</h3>
+              <p style="color:var(--text-muted); margin-bottom:24px;">We're confirming your bank transfer of <strong id="confirmingAmount"></strong>. You'll receive a notification the moment it's confirmed.</p>
+              <div class="detail-list" id="confirmingDetails"></div>
+              <button class="btn btn-ghost btn-block" id="cancelOrderBtn2">Cancel Order</button>
+            </div>
+
+            <!-- Step 3b: Processing -->
+            <div id="screenProcessing" style="display:none; text-align:center;">
+              <div class="success-icon" style="background: var(--warning-soft); color: var(--warning);"><i class='bx bx-time-five'></i></div>
+              <h3 style="margin-bottom:8px;">Crypto Payout Processing</h3>
+              <p style="color:var(--text-muted); margin-bottom:24px;">Your purchase of <strong id="processingAmount"></strong> is being sent to your wallet. This typically completes within 15 minutes.</p>
+              <div class="detail-list" id="processingDetails"></div>
+              <button class="btn btn-primary btn-block btn-lg" id="newOrderBtn" style="margin-top:24px;"><i class='bx bx-refresh'></i> Start a New Order</button>
+              <a href="transactions.html" class="btn btn-secondary btn-block" style="margin-top:10px;">View Transaction History</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/buy.js"></script>
+</body>
+</html>

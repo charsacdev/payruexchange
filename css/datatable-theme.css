@@ -1,0 +1,130 @@
+/* =========================================================
+   PayruExchange — Dark theme for jQuery DataTables
+   Restyles the DataTables plugin to match .data-table /
+   .datatable-pagination so it blends into the existing UI.
+   ========================================================= */
+
+.dataTables_wrapper {
+  width: 100%;
+  color: var(--text);
+}
+
+table.dataTable {
+  width: 100% !important;
+  border-collapse: collapse;
+}
+
+table.dataTable thead th {
+  text-align: left;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 16px 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+table.dataTable tbody td {
+  padding: 16px 16px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 14px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+table.dataTable tbody tr:hover td {
+  background: var(--surface-2);
+}
+
+table.dataTable th:first-child,
+table.dataTable td:first-child {
+  padding-left: 0;
+}
+
+/* ---------- Footer (info + pagination) ---------- */
+.dt-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.dataTables_info {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.dataTables_paginate {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* DataTables wraps the numbered page links (simple_numbers) in a bare
+   <span> — without making it a flex container too, the blockified
+   .paginate_button children below stack vertically instead of inline. */
+.dataTables_paginate > span {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.dataTables_paginate .paginate_button {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted) !important;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: all var(--transition);
+}
+
+.dataTables_paginate .paginate_button:hover:not(.disabled):not(.current) {
+  border-color: var(--primary);
+  color: var(--primary) !important;
+  background: var(--bg-soft);
+}
+
+.dataTables_paginate .paginate_button.current,
+.dataTables_paginate .paginate_button.current:hover {
+  background: var(--gradient);
+  border-color: transparent;
+  color: #06140f !important;
+}
+
+.dataTables_paginate .paginate_button.disabled,
+.dataTables_paginate .paginate_button.disabled:hover {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--border);
+  background: var(--bg-soft);
+  color: var(--text-muted) !important;
+}
+
+.dataTables_empty {
+  text-align: center;
+  color: var(--text-dim);
+  padding: 24px !important;
+}
+
+@media (max-width: 480px) {
+  .dt-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

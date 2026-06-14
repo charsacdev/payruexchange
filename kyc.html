@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identity Verification — PayruExchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+  <div class="centered-page">
+    <!-- ===== Top bar ===== -->
+    <header class="simple-topbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">P</div>
+          <span>Payru<span>Exchange</span></span>
+        </a>
+        <button class="btn btn-ghost" id="logoutBtn"><i class='bx bx-log-out'></i> Log Out</button>
+      </div>
+    </header>
+
+    <!-- ===== Center content ===== -->
+    <div class="center-wrap">
+      <div class="kyc-card">
+
+        <!-- ===== KYC Form ===== -->
+        <div id="kycFormWrap">
+          <div class="kyc-head">
+            <div class="feature-icon"><i class='bx bx-id-card'></i></div>
+            <h2>Verify Your Identity</h2>
+            <p>To keep your account secure and comply with regulations, please provide a valid means of identification before you start trading.</p>
+          </div>
+
+          <div class="card" id="rejectedBanner" style="display:none; border-color: rgba(255,92,124,0.3); background: var(--danger-soft); margin-bottom: 0; margin-top: 24px; align-items: center; gap: 14px;">
+            <i class='bx bx-error-circle' style="font-size: 24px; color: var(--danger);"></i>
+            <div>
+              <strong style="display:block; margin-bottom: 2px;">Your previous submission was rejected</strong>
+              <span style="font-size: 13.5px; color: var(--text-muted);">Please double-check your details and resubmit below.</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <form id="kycForm" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="idType">ID Type</label>
+                <select id="idType" class="form-control" required>
+                  <option value="" disabled selected>Select an ID type</option>
+                  <option value="nin">National ID Number (NIN)</option>
+                  <option value="voters_card">Voter's Card (PVC)</option>
+                  <option value="drivers_license">Driver's License</option>
+                  <option value="passport">International Passport</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" id="idNumberLabel" for="idNumber">ID Number</label>
+                <input type="text" id="idNumber" class="form-control" placeholder="Select an ID type first" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="dob">Date of Birth</label>
+                <input type="date" id="dob" class="form-control" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="address">Residential Address</label>
+                <textarea id="address" class="form-control" placeholder="Enter your full residential address" required></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="city">City</label>
+                  <input type="text" id="city" class="form-control" placeholder="e.g. Lagos" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="state">State</label>
+                  <select id="state" class="form-control" required>
+                    <option value="" disabled selected>Select your state</option>
+                    <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+                    <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+                    <option>Benue</option><option>Borno</option><option>Cross River</option>
+                    <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+                    <option>Ekiti</option><option>Enugu</option><option>Gombe</option>
+                    <option>Imo</option><option>Jigawa</option><option>Kaduna</option>
+                    <option>Kano</option><option>Katsina</option><option>Kebbi</option>
+                    <option>Kogi</option><option>Kwara</option><option>Lagos</option>
+                    <option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+                    <option>Ondo</option><option>Osun</option><option>Oyo</option>
+                    <option>Plateau</option><option>Rivers</option><option>Sokoto</option>
+                    <option>Taraba</option><option>Yobe</option><option>Zamfara</option>
+                    <option>FCT - Abuja</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="country">Country</label>
+                <select id="country" class="form-control" required>
+                  <option selected>Nigeria</option>
+                  <option>Ghana</option>
+                  <option>Kenya</option>
+                  <option>South Africa</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="documentImage">Front of ID Document</label>
+                <label class="file-drop" id="fileDrop" for="documentImage">
+                  <div class="file-drop-icon"><i class='bx bx-cloud-upload'></i></div>
+                  <img id="documentPreview" class="file-drop-preview" style="display:none;" alt="Document preview" />
+                  <div class="file-drop-text" id="fileDropText">
+                    <strong>Click to upload</strong> or drag and drop
+                    <span>PNG or JPG, up to 5MB</span>
+                  </div>
+                </label>
+                <input type="file" id="documentImage" class="file-input-hidden" accept="image/png, image/jpeg" />
+                <div class="form-hint">Upload a clear photo of the front of your selected ID document.</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="documentImageBack">Back of ID Document</label>
+                <label class="file-drop" id="fileDropBack" for="documentImageBack">
+                  <div class="file-drop-icon"><i class='bx bx-cloud-upload'></i></div>
+                  <img id="documentPreviewBack" class="file-drop-preview" style="display:none;" alt="Document back preview" />
+                  <div class="file-drop-text" id="fileDropTextBack">
+                    <strong>Click to upload</strong> or drag and drop
+                    <span>PNG or JPG, up to 5MB</span>
+                  </div>
+                </label>
+                <input type="file" id="documentImageBack" class="file-input-hidden" accept="image/png, image/jpeg" />
+                <div class="form-hint">Upload a clear photo of the back of your selected ID document.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-lg">
+                <i class='bx bx-check-shield'></i> Submit for Verification
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- ===== Pending Review ===== -->
+        <div id="kycPendingWrap" class="card kyc-status-card" style="display:none;">
+          <div class="feature-icon"><i class='bx bx-time-five'></i></div>
+          <h2>Verification Under Review</h2>
+          <p>Thanks for submitting your details. Our team is reviewing your identity documents — this usually takes less than 24 hours. You'll be notified once it's approved.</p>
+          <a href="dashboard.html" class="btn btn-primary btn-lg"><i class='bx bx-grid-alt'></i> Go to Dashboard</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/kyc.js"></script>
+  <script>
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      PayruDB.clearSession();
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
