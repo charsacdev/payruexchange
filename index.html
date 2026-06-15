@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "light";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
   <title>PayruExchange — Buy &amp; Sell Crypto Instantly</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -27,6 +33,10 @@
         <a href="privacy-policy.html">Privacy</a>
       </nav>
       <div class="nav-actions" id="navActions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class='bx bx-moon'></i>
+          <i class='bx bx-sun'></i>
+        </button>
         <a href="login.html" class="btn btn-ghost">Log In</a>
         <a href="register.html" class="btn btn-primary">Get Started</a>
         <button class="nav-toggle" id="navToggle"><i class='bx bx-menu'></i></button>
@@ -117,15 +127,8 @@
   <section class="section" id="features" style="background: var(--bg-soft);">
     <div class="container">
       <div class="grid features-split">
-        <div class="features-image fade-up">
-          <img src="assets/images/happy-customer-app.svg" alt="Illustration of a happy woman smiling while using the PayruExchange app on her phone" loading="lazy" />
-          <div class="features-image-badge">
-            <i class='bx bx-shield-check'></i>
-            <div>
-              <strong>Bank-Grade Security</strong>
-              <span>256-bit encryption on every transaction</span>
-            </div>
-          </div>
+        <div class="features-image features-image--wide fade-up">
+          <img src="assets/images/happytrilled.png" alt="A happy PayruExchange customer celebrating after successfully selling Bitcoin and receiving an instant Naira payout" loading="lazy" />
         </div>
         <div class="features-content fade-up">
           <div class="section-tag"><i class='bx bx-star'></i> Why PayruExchange</div>
@@ -158,6 +161,84 @@
               <div>
                 <h3>Real-Time Notifications</h3>
                 <p>Track every step of your transaction with instant updates on deposits and payouts.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Seamless Transactions ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="grid features-split">
+        <div class="features-content fade-up">
+          <div class="section-tag"><i class='bx bx-flash'></i> Effortless Experience</div>
+          <h2>Seamless Transactions, Every Single Time</h2>
+          <p class="lead-sm">From the moment you place an order to the second your payout lands, PayruExchange is built to feel effortless — clear steps, instant confirmations, and zero guesswork.</p>
+          <div class="features-list">
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-check-shield'></i></div>
+              <div>
+                <h3>Instant Order Confirmation</h3>
+                <p>Every transaction is confirmed in real time, so you always know exactly where your money is.</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-repeat'></i></div>
+              <div>
+                <h3>One-Click Repeat Orders</h3>
+                <p>Save your details and repeat your favorite transactions in just a couple of taps.</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-mobile-alt'></i></div>
+              <div>
+                <h3>Track Anywhere, Anytime</h3>
+                <p>Monitor your deposits, conversions, and payouts from any device, wherever you are.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="features-image fade-up">
+          <img src="assets/images/woman1.png" alt="A PayruExchange user smiling while checking her Naira balance on her phone after a successful crypto sale" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Community / Collaboration ===== -->
+  <section class="section" style="background: var(--bg-soft);">
+    <div class="container">
+      <div class="grid features-split">
+        <div class="features-image fade-up">
+          <img src="assets/images/friends.png" alt="Two PayruExchange team members in branded polo shirts collaborating over a laptop" loading="lazy" />
+        </div>
+        <div class="features-content fade-up">
+          <div class="section-tag"><i class='bx bx-group'></i> Our Community</div>
+          <h2>A Growing Community Built on Trust</h2>
+          <p class="lead-sm">Behind every transaction is a real team and a growing community of users who trust PayruExchange to handle their crypto-to-cash conversions, day after day.</p>
+          <div class="features-list">
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-support'></i></div>
+              <div>
+                <h3>Dedicated Support Team</h3>
+                <p>Our team is made up of real people, ready to help with KYC, deposits, payouts and anything else.</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-like'></i></div>
+              <div>
+                <h3>Thousands of Happy Users</h3>
+                <p>Join a fast-growing community of users across Nigeria who rely on PayruExchange every day.</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-icon"><i class='bx bx-conversation'></i></div>
+              <div>
+                <h3>Community-Driven Improvements</h3>
+                <p>We listen to user feedback and continuously improve the platform based on real experiences.</p>
               </div>
             </div>
           </div>
@@ -377,5 +458,6 @@
   <script src="js/db.js"></script>
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>
+  <script src="js/theme.js"></script>
 </body>
 </html>

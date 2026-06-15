@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages — PayruExchange Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body data-page="messages" data-title="Messages" data-subtitle="Send an announcement to every user on the platform.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+        <div class="card" style="max-width:720px;">
+          <div class="card-head"><h3>Broadcast Message</h3></div>
+          <p style="color: var(--text-muted); font-size:14px; margin-bottom:20px;">
+            This will appear as a notification on every user's Notifications page and bell menu.
+          </p>
+
+          <form id="broadcastForm">
+            <div class="form-group">
+              <label class="form-label" for="msgAudience">Send To</label>
+              <select id="msgAudience" class="form-control"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="msgTitle">Message Header</label>
+              <input type="text" id="msgTitle" class="form-control" placeholder="e.g. Scheduled Maintenance" maxlength="80" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="msgBody">Message</label>
+              <div class="rte">
+                <div class="rte-toolbar">
+                  <button type="button" class="rte-btn" data-cmd="bold" title="Bold"><i class='bx bx-bold'></i></button>
+                  <button type="button" class="rte-btn" data-cmd="italic" title="Italic"><i class='bx bx-italic'></i></button>
+                  <button type="button" class="rte-btn" data-cmd="underline" title="Underline"><i class='bx bx-underline'></i></button>
+                  <span class="rte-divider"></span>
+                  <button type="button" class="rte-btn" data-cmd="insertUnorderedList" title="Bullet list"><i class='bx bx-list-ul'></i></button>
+                  <button type="button" class="rte-btn" data-cmd="insertOrderedList" title="Numbered list"><i class='bx bx-list-ol'></i></button>
+                  <span class="rte-divider"></span>
+                  <button type="button" class="rte-btn" data-cmd="removeFormat" title="Clear formatting"><i class='bx bx-eraser'></i></button>
+                </div>
+                <div id="msgBody" class="rte-editor" contenteditable="true" data-placeholder="Write your announcement..."></div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><i class='bx bx-send'></i> Send Message</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/admin-messages.js"></script>
+</body>
+</html>

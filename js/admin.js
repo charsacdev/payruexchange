@@ -26,7 +26,9 @@ function adminSidebarHTML(activePage) {
       ${item("kyc", "kyc.html", "bx-id-card", "KYC Review", stats.pendingKYC)}
       ${item("deposits", "deposits.html", "bx-download", "Deposits", stats.pendingDeposits)}
       ${item("withdrawals", "withdrawals.html", "bx-upload", "Withdrawals", stats.pendingPayouts)}
+      ${item("transactions", "transactions.html", "bx-receipt", "Transactions")}
       ${item("users", "users.html", "bx-group", "Users")}
+      ${item("messages", "messages.html", "bx-envelope", "Messages")}
       ${item("settings", "settings.html", "bx-cog", "Settings")}
     </nav>
     <div class="sidebar-footer">
@@ -41,6 +43,10 @@ function adminTopbarHTML(admin) {
       <button class="sidebar-toggle" id="sidebarToggle"><i class='bx bx-menu'></i></button>
     </div>
     <div class="topbar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class='bx bx-moon'></i>
+        <i class='bx bx-sun'></i>
+      </button>
       <div class="topbar-user">
         <div class="avatar">${adminInitials(admin)}</div>
         <div class="topbar-user-info">

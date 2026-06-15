@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "light";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
   <title>About Us — PayruExchange</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -27,6 +33,10 @@
         <a href="privacy-policy.html">Privacy</a>
       </nav>
       <div class="nav-actions" id="navActions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class='bx bx-moon'></i>
+          <i class='bx bx-sun'></i>
+        </button>
         <a href="login.html" class="btn btn-ghost">Log In</a>
         <a href="register.html" class="btn btn-primary">Get Started</a>
         <button class="nav-toggle" id="navToggle"><i class='bx bx-menu'></i></button>
@@ -53,7 +63,7 @@
         <p style="color: var(--text-muted); margin-bottom: 16px;">Today, PayruExchange serves tens of thousands of users across Nigeria, offering competitive rates, secure KYC-backed accounts, and payouts that land directly in your bank account — often within minutes.</p>
         <p style="color: var(--text-muted);">Whether you're cashing out savings, getting paid for freelance work in crypto, or simply liquidating an investment, we're here to make the process effortless.</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=640&h=520&fit=crop&auto=format&q=80" alt="PayruExchange team reviewing transaction data on a laptop" class="about-visual fade-up" loading="lazy" />
+      <img src="assets/images/teams.png" alt="The PayruExchange team celebrating together around their laptops" class="about-visual fade-up" loading="lazy" />
     </div>
   </section>
 
@@ -228,5 +238,6 @@
 
   <script src="js/db.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/theme.js"></script>
 </body>
 </html>

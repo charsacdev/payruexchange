@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transactions — PayruExchange Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/datatable-theme.css" />
+</head>
+<body data-page="transactions" data-title="Transaction History" data-subtitle="Browse every transaction on the platform and generate a profit statement for a date range.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+
+        <!-- ===== Profit statement ===== -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-head"><h3>Profit Statement</h3></div>
+          <form id="rangeForm" style="display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap;">
+            <div class="form-group" style="flex:1; min-width:160px; margin-bottom:0;">
+              <label class="form-label" for="startDate">Start Date</label>
+              <input type="date" id="startDate" class="form-control" required />
+            </div>
+            <div class="form-group" style="flex:1; min-width:160px; margin-bottom:0;">
+              <label class="form-label" for="endDate">End Date</label>
+              <input type="date" id="endDate" class="form-control" required />
+            </div>
+            <div class="form-group" style="flex:0 0 auto; margin-bottom:0;">
+              <button type="submit" class="btn btn-primary"><i class='bx bx-line-chart'></i> Generate Statement</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ===== Summary cards ===== -->
+        <div class="grid stats-grid">
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-primary"><i class='bx bx-list-ul'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Completed Orders</div>
+              <div class="stat-value" id="statTxnCount">0</div>
+              <div class="stat-sub" id="statRangeLabel">In selected range</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-info"><i class='bx bx-dollar-circle'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Volume</div>
+              <div class="stat-value" id="statVolumeUSD">$0.00</div>
+              <div class="stat-sub" id="statVolumeNGN">₦0</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-success"><i class='bx bx-trending-up'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Estimated Profit</div>
+              <div class="stat-value" id="statProfit">₦0</div>
+              <div class="stat-sub" id="statSpread">Spread: ₦0 per $1</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== All transactions ===== -->
+        <div class="card">
+          <div class="card-head">
+            <h3>All Transactions</h3>
+          </div>
+
+          <div class="filter-bar">
+            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search by name, email or asset..." />
+            <select id="typeFilter" class="form-control">
+              <option value="all">All Types</option>
+              <option value="buy">Buy</option>
+              <option value="sell">Sell</option>
+            </select>
+            <select id="statusFilter" class="form-control">
+              <option value="all">All Statuses</option>
+              <option value="completed">Completed</option>
+              <option value="in_progress">In Progress</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="table-wrap" id="txnTableWrap">
+            <table class="data-table" id="txnTable">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Type</th>
+                  <th>Asset</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="txnBody"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="txnEmpty" style="display:none;">
+            <i class='bx bx-receipt'></i>
+            <h4>No transactions found</h4>
+            <p>There's nothing to show for this filter right now.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="../js/datatable.js"></script>
+  <script src="../js/admin-transactions.js"></script>
+</body>
+</html>

@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard — PayruExchange</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -168,6 +174,7 @@
   <script src="../js/db.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/admin.js"></script>
+  <script src="../js/theme.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
   <script src="../js/datatable.js"></script>

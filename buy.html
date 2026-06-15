@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Buy Crypto — PayruExchange</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -160,6 +166,7 @@
   <script src="js/db.js"></script>
   <script src="js/main.js"></script>
   <script src="js/dashboard.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/buy.js"></script>
 </body>
 </html>

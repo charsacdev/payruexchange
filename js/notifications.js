@@ -10,8 +10,6 @@ const NOTIF_ICONS = {
   sell: { icon: "bx-coin-stack", cls: "icon-primary" },
 };
 
-const notifPaginator = new PayruDataTable.Paginator("notifPagination", 8);
-
 document.addEventListener("DOMContentLoaded", () => {
   const user = PayruDB.requireAuth("login.html");
   if (!user) return;
@@ -32,7 +30,6 @@ function renderNotifications(user) {
 
   if (notifications.length === 0) {
     list.style.display = "none";
-    document.getElementById("notifPagination").innerHTML = "";
     emptyState.style.display = "block";
     return;
   }
@@ -40,17 +37,15 @@ function renderNotifications(user) {
   list.style.display = "flex";
   emptyState.style.display = "none";
 
-  notifPaginator.render(notifications, (pageItems) => {
-    list.innerHTML = pageItems.map(renderNotifItem).join("");
+  list.innerHTML = notifications.map(renderNotifItem).join("");
 
-    list.querySelectorAll("[data-notif]").forEach((item) => {
-      item.addEventListener("click", () => {
-        if (item.classList.contains("unread")) {
-          PayruDB.markNotificationRead(item.dataset.notif);
-          item.classList.remove("unread");
-          refreshUnreadIndicators(user);
-        }
-      });
+  list.querySelectorAll("[data-notif]").forEach((item) => {
+    item.addEventListener("click", () => {
+      if (item.classList.contains("unread")) {
+        PayruDB.markNotificationRead(item.dataset.notif);
+        item.classList.remove("unread");
+        refreshUnreadIndicators(user);
+      }
     });
   });
 }
@@ -62,7 +57,7 @@ function renderNotifItem(n) {
       <div class="notif-icon ${ic.cls}"><i class='bx ${ic.icon}'></i></div>
       <div class="notif-body">
         <strong>${n.title}</strong>
-        <p>${n.message}</p>
+        <div class="notif-message">${n.message}</div>
         <time>${PayruDB.timeAgo(n.createdAt)}</time>
       </div>
     </div>

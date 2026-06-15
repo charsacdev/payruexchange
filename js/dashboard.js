@@ -50,6 +50,10 @@ function userTopbarHTML(user) {
       <button class="sidebar-toggle" id="sidebarToggle"><i class='bx bx-menu'></i></button>
     </div>
     <div class="topbar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class='bx bx-moon'></i>
+        <i class='bx bx-sun'></i>
+      </button>
       <a href="notifications.html" class="topbar-icon-btn" title="Notifications">
         <i class='bx bx-bell'></i>
         ${unread > 0 ? `<span class="notif-dot"></span>` : ""}

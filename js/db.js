@@ -1115,6 +1115,30 @@
     return db.notifications.filter((n) => n.userId === userId && !n.read).length;
   }
 
+  function broadcastNotification({ audience, title, message }) {
+    const db = load();
+    const now = nowISO();
+    let recipients = db.users.filter((u) => u.role === "user");
+    if (audience === "verified") {
+      recipients = recipients.filter((u) => u.kyc.status === "verified");
+    } else if (audience === "unverified") {
+      recipients = recipients.filter((u) => u.kyc.status !== "verified");
+    }
+    recipients.forEach((u) => {
+      db.notifications.unshift({
+        id: uid("ntf"),
+        userId: u.id,
+        type: "info",
+        title,
+        message,
+        read: false,
+        createdAt: now,
+      });
+    });
+    save(db);
+    return recipients.length;
+  }
+
   /* ---------- Admin helpers ---------- */
   function getAllUsers() {
     const db = load();
@@ -1222,7 +1246,7 @@
     createBuyOrder, markPaymentSent, confirmPayment, completeCryptoPayout,
     formatCryptoAmount,
     // notifications
-    getNotifications, addNotification, markNotificationRead, markAllNotificationsRead, getUnreadCount,
+    getNotifications, addNotification, markNotificationRead, markAllNotificationsRead, getUnreadCount, broadcastNotification,
     // flash messages
     setFlash, consumeFlash,
     // admin

@@ -144,7 +144,7 @@
   border-bottom: 1px solid var(--border-soft);
   position: sticky;
   top: 0;
-  background: rgba(8, 11, 20, 0.8);
+  background: var(--navbar-bg);
   backdrop-filter: blur(14px);
   z-index: 50;
 }
@@ -301,14 +301,16 @@
 
 /* ---------- Stat cards ---------- */
 .stats-grid {
-  grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .stat-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
+  padding: 16px 18px;
 }
 
 .stat-card-head {
@@ -318,13 +320,13 @@
 }
 
 .stat-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm, 10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 21px;
+  font-size: 16px;
 }
 
 .icon-primary { background: var(--primary-soft); color: var(--primary); }
@@ -335,19 +337,19 @@
 .icon-accent { background: var(--accent-soft); color: var(--accent); }
 
 .stat-label {
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: var(--text-muted);
   font-weight: 500;
 }
 
 .stat-value {
   font-family: "Sora", sans-serif;
-  font-size: 28px;
+  font-size: 21px;
   font-weight: 800;
 }
 
 .stat-sub {
-  font-size: 12.5px;
+  font-size: 11.5px;
   color: var(--text-dim);
 }
 
@@ -593,6 +595,97 @@
   min-width: 220px;
 }
 
+/* ---------- Rich text editor ---------- */
+.rte {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.rte:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.rte-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.rte-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 17px;
+  transition: all var(--transition);
+}
+
+.rte-btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.rte-btn.active {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.rte-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+.rte-editor {
+  padding: 13px 16px;
+  min-height: 140px;
+  max-height: 320px;
+  overflow-y: auto;
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.rte-editor:focus {
+  outline: none;
+}
+
+.rte-editor:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.rte-editor div {
+  margin-bottom: 4px;
+}
+
+.rte-editor ul,
+.rte-editor ol {
+  margin: 4px 0 4px 22px;
+}
+
+.rte-editor ul {
+  list-style: disc;
+}
+
+.rte-editor ol {
+  list-style: decimal;
+}
+
 /* ---------- Notification list ---------- */
 .notif-list {
   display: flex;
@@ -647,10 +740,29 @@
   margin-bottom: 4px;
 }
 
-.notif-body p {
+.notif-body p,
+.notif-body .notif-message {
   font-size: 13.5px;
   color: var(--text-muted);
   margin-bottom: 6px;
+}
+
+.notif-message div,
+.notif-message p {
+  margin-bottom: 4px;
+}
+
+.notif-message ul,
+.notif-message ol {
+  margin: 4px 0 4px 22px;
+}
+
+.notif-message ul {
+  list-style: disc;
+}
+
+.notif-message ol {
+  list-style: decimal;
 }
 
 .notif-body time {
@@ -1003,10 +1115,6 @@
   .dashboard-cols {
     grid-template-columns: 1fr;
   }
-
-  .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 @media (max-width: 860px) {
@@ -1029,10 +1137,6 @@
 
   .sidebar-toggle {
     display: flex;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
   }
 
   .page-content {
