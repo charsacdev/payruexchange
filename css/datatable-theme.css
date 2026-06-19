@@ -1,48 +1,168 @@
 /* =========================================================
-   PayruExchange — Dark theme for jQuery DataTables
-   Restyles the DataTables plugin to match .data-table /
-   .datatable-pagination so it blends into the existing UI.
+   PayruExchange — Premium DataTables theme
+   Matches the dark / light design system.
    ========================================================= */
 
+/* ---- Wrapper ---- */
 .dataTables_wrapper {
   width: 100%;
   color: var(--text);
 }
 
+/* ---- Table base ---- */
 table.dataTable {
   width: 100% !important;
   border-collapse: collapse;
 }
 
-table.dataTable thead th {
-  text-align: left;
-  font-size: 12px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0 16px 12px;
-  font-weight: 600;
-  white-space: nowrap;
+/* ---- Header ---- */
+table.dataTable thead tr {
+  background: var(--bg-soft);
+  border-bottom: 2px solid var(--border);
 }
 
+table.dataTable thead th {
+  text-align: left;
+  font-size: 11.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 14px 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
+}
+
+/* ---- Body rows ---- */
 table.dataTable tbody td {
-  padding: 16px 16px;
-  border-top: 1px solid var(--border-soft);
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--border-soft);
   font-size: 14px;
   vertical-align: middle;
   white-space: nowrap;
+  transition: background var(--transition);
+}
+
+table.dataTable tbody tr:last-child td {
+  border-bottom: none;
 }
 
 table.dataTable tbody tr:hover td {
-  background: var(--surface-2);
+  background: var(--surface-hover);
 }
 
 table.dataTable th:first-child,
 table.dataTable td:first-child {
-  padding-left: 0;
+  padding-left: 20px;
 }
 
-/* ---------- Footer (info + pagination) ---------- */
+table.dataTable th:last-child,
+table.dataTable td:last-child {
+  padding-right: 20px;
+}
+
+/* ---- Sort indicators ---- */
+table.dataTable thead th.sorting,
+table.dataTable thead th.sorting_asc,
+table.dataTable thead th.sorting_desc {
+  cursor: pointer;
+  padding-right: 28px;
+}
+
+table.dataTable thead th.sorting::after {
+  content: '↕';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--text-dim);
+  opacity: 0.4;
+}
+
+table.dataTable thead th.sorting_asc::after {
+  content: '↑';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--primary);
+  opacity: 1;
+}
+
+table.dataTable thead th.sorting_desc::after {
+  content: '↓';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--primary);
+  opacity: 1;
+}
+
+table.dataTable thead th.sorting_disabled {
+  cursor: default;
+}
+
+/* ---- Top bar (show entries) ---- */
+.dt-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 0;
+}
+
+.dataTables_length {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.dataTables_length label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: default;
+}
+
+.dataTables_length select {
+  height: 36px;
+  padding: 0 30px 0 12px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%238C96B8' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.dataTables_length select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.dataTables_length select:hover {
+  border-color: var(--primary);
+}
+
+/* ---- Footer (info + pagination) ---- */
 .dt-footer {
   display: flex;
   align-items: center;
@@ -59,28 +179,26 @@ table.dataTable td:first-child {
   color: var(--text-dim);
 }
 
+/* ---- Pagination ---- */
 .dataTables_paginate {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
-/* DataTables wraps the numbered page links (simple_numbers) in a bare
-   <span> — without making it a flex container too, the blockified
-   .paginate_button children below stack vertically instead of inline. */
 .dataTables_paginate > span {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 .dataTables_paginate .paginate_button {
-  min-width: 34px;
-  height: 34px;
+  min-width: 36px;
+  height: 36px;
   padding: 0 10px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background: var(--bg-soft);
@@ -92,12 +210,20 @@ table.dataTable td:first-child {
   cursor: pointer;
   text-decoration: none !important;
   transition: all var(--transition);
+  line-height: 1;
+}
+
+.dataTables_paginate .paginate_button i {
+  font-size: 16px;
+  line-height: 1;
 }
 
 .dataTables_paginate .paginate_button:hover:not(.disabled):not(.current) {
   border-color: var(--primary);
   color: var(--primary) !important;
-  background: var(--bg-soft);
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 224, 168, 0.15);
 }
 
 .dataTables_paginate .paginate_button.current,
@@ -105,26 +231,44 @@ table.dataTable td:first-child {
   background: var(--gradient);
   border-color: transparent;
   color: #06140f !important;
+  box-shadow: 0 4px 14px rgba(0, 224, 168, 0.3);
 }
 
 .dataTables_paginate .paginate_button.disabled,
 .dataTables_paginate .paginate_button.disabled:hover {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
   border-color: var(--border);
   background: var(--bg-soft);
   color: var(--text-muted) !important;
+  transform: none;
+  box-shadow: none;
 }
 
+/* ---- First / Last buttons get slightly wider ---- */
+.dataTables_paginate .paginate_button.first,
+.dataTables_paginate .paginate_button.last {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+/* ---- Empty state ---- */
 .dataTables_empty {
   text-align: center;
   color: var(--text-dim);
-  padding: 24px !important;
+  padding: 28px !important;
+  font-size: 14px;
 }
 
-@media (max-width: 480px) {
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
   .dt-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .dataTables_paginate .paginate_button.first,
+  .dataTables_paginate .paginate_button.last {
+    display: none;
   }
 }

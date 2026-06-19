@@ -9,10 +9,11 @@
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
-  <title>PayruExchange — Buy &amp; Sell Crypto Instantly</title>
+  <title>PayruExchange — Cross-Border Crypto to Fiat Settlement</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/home.css" />
 </head>
@@ -29,8 +30,8 @@
         <a href="index.html" class="active">Home</a>
         <a href="about.html">About Us</a>
         <a href="index.html#how-it-works">How It Works</a>
+        <a href="index.html#countries">Countries</a>
         <a href="index.html#faq">FAQ</a>
-        <a href="privacy-policy.html">Privacy</a>
       </nav>
       <div class="nav-actions" id="navActions">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -46,34 +47,35 @@
 
   <!-- ===== Hero ===== -->
   <section class="hero">
+    <div id="hero-particles"></div>
     <div class="container">
-      <div class="hero-text fade-up">
-        <div class="section-tag"><i class='bx bx-shield-quarter'></i> Buy &amp; Sell Crypto Securely</div>
-        <h1>Buy &amp; Sell Crypto. Get Paid in <span class="text-gradient">Naira</span> — Instantly.</h1>
-        <p class="lead">PayruExchange lets you buy Bitcoin, USDT, Ethereum and more with Naira, or sell your crypto for cash paid straight to your bank account in minutes. No long waits, no hidden fees.</p>
+      <div class="hero-text fade-up" data-aos="fade-right" data-aos-duration="900">
+        <div class="section-tag"><i class='bx bx-world'></i> Cross-Border Crypto Settlement</div>
+        <h1>Convert Crypto to Your Local Currency — Instantly, Across <span class="text-gradient">7+ Countries.</span></h1>
+        <p class="lead">PayruExchange is the fastest way to convert Bitcoin, USDT, Ethereum and more into your local fiat currency. Send crypto from anywhere — receive NGN, GHS, ZAR, RWF, PKR and more, paid directly to your bank account in minutes.</p>
         <div class="hero-actions">
-          <a href="register.html" class="btn btn-primary btn-lg"><i class='bx bx-rocket'></i> Create Free Account</a>
-          <a href="#how-it-works" class="btn btn-outline btn-lg"><i class='bx bx-play-circle'></i> How It Works</a>
+          <a href="register.html" class="btn btn-primary btn-lg"><i class='bx bx-rocket'></i> Start Converting</a>
+          <a href="#countries" class="btn btn-outline btn-lg"><i class='bx bx-globe'></i> View Countries</a>
         </div>
         <div class="hero-stats">
+          <div class="stat">
+            <strong>7+</strong>
+            <span>Countries Supported</span>
+          </div>
           <div class="stat">
             <strong>50K+</strong>
             <span>Active Users</span>
           </div>
           <div class="stat">
-            <strong>₦12B+</strong>
-            <span>Processed Payouts</span>
-          </div>
-          <div class="stat">
             <strong>&lt; 15 min</strong>
-            <span>Average Payout Time</span>
+            <span>Average Settlement</span>
           </div>
         </div>
       </div>
-      <div class="hero-visual fade-up">
+      <div class="hero-visual fade-up" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
         <div class="rate-carousel" id="rateCarousel">
           <div class="rate-carousel-head">
-            <span class="rate-carousel-label"><i class='bx bx-pulse'></i> Live Market Rates</span>
+            <span class="rate-carousel-label"><i class='bx bx-pulse'></i> Live Rates</span>
             <span class="rate-carousel-live"><span class="live-dot"></span> Live</span>
           </div>
           <div class="rate-carousel-viewport">
@@ -90,77 +92,126 @@
     <div class="ticker-track" id="tickerTrack"></div>
   </section>
 
+  <!-- ===== Countries ===== -->
+  <section class="section" id="countries" style="background: var(--bg-soft);">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up" data-aos-duration="700">
+        <div class="section-tag"><i class='bx bx-world'></i> Global Reach</div>
+        <h2>One Platform. 7+ Countries. Your Local Currency.</h2>
+        <p>No matter where you are, convert your crypto and receive your local fiat currency directly in your bank account — fast, secure, and transparent.</p>
+      </div>
+      <div class="countries-grid">
+        <div class="country-card" data-aos="zoom-in" data-aos-delay="0" data-aos-duration="700">
+          <span class="country-flag">🇳🇬</span>
+          <div class="country-name">Nigeria</div>
+          <div class="country-currency">Nigerian Naira<br /><strong>₦ NGN</strong></div>
+          <span class="country-badge"><i class='bx bx-check-circle'></i> Live</span>
+        </div>
+        <div class="country-card" data-aos="zoom-in" data-aos-delay="80" data-aos-duration="700">
+          <span class="country-flag">🇬🇭</span>
+          <div class="country-name">Ghana</div>
+          <div class="country-currency">Ghanaian Cedi<br /><strong>₵ GHS</strong></div>
+          <span class="country-badge"><i class='bx bx-check-circle'></i> Live</span>
+        </div>
+        <div class="country-card" data-aos="zoom-in" data-aos-delay="160" data-aos-duration="700">
+          <span class="country-flag">🇿🇦</span>
+          <div class="country-name">South Africa</div>
+          <div class="country-currency">South African Rand<br /><strong>R ZAR</strong></div>
+          <span class="country-badge"><i class='bx bx-check-circle'></i> Live</span>
+        </div>
+        <div class="country-card" data-aos="zoom-in" data-aos-delay="240" data-aos-duration="700">
+          <span class="country-flag">🇷🇼</span>
+          <div class="country-name">Rwanda</div>
+          <div class="country-currency">Rwandan Franc<br /><strong>Fr RWF</strong></div>
+          <span class="country-badge"><i class='bx bx-check-circle'></i> Live</span>
+        </div>
+        <div class="country-card" data-aos="zoom-in" data-aos-delay="320" data-aos-duration="700">
+          <span class="country-flag">🇵🇰</span>
+          <div class="country-name">Pakistan</div>
+          <div class="country-currency">Pakistani Rupee<br /><strong>₨ PKR</strong></div>
+          <span class="country-badge"><i class='bx bx-check-circle'></i> Live</span>
+        </div>
+        <div class="country-card country-card--more" data-aos="zoom-in" data-aos-delay="400" data-aos-duration="700">
+          <span class="country-flag">🌍</span>
+          <div class="country-name">More Coming</div>
+          <div class="country-currency">Expanding across Africa, Asia &amp; beyond</div>
+          <span class="country-badge country-badge--soon"><i class='bx bx-time-five'></i> Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== How It Works ===== -->
   <section class="section" id="how-it-works">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-aos="fade-up" data-aos-duration="700">
         <div class="section-tag"><i class='bx bx-list-ol'></i> Simple Process</div>
-        <h2>How PayruExchange Works</h2>
-        <p>Cash out your crypto in four simple steps — fast, secure, and transparent.</p>
+        <h2>Cross-Border Settlement in 4 Simple Steps</h2>
+        <p>Send crypto from anywhere in the world and receive your local currency directly in your bank — fast, secure, and completely transparent.</p>
       </div>
       <div class="grid steps-grid">
-        <div class="step-card fade-up">
+        <div class="step-card fade-up" data-aos="fade-up" data-aos-delay="0" data-aos-duration="700">
           <div class="step-number">1</div>
           <h3>Create &amp; Verify Account</h3>
-          <p>Sign up in seconds and complete a quick KYC check using your NIN, Voter's Card or other valid ID.</p>
+          <p>Sign up in seconds and complete KYC verification using your national ID — supported across all 7+ countries.</p>
         </div>
-        <div class="step-card fade-up">
+        <div class="step-card fade-up" data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">
           <div class="step-number">2</div>
-          <h3>Enter Amount &amp; Select Asset</h3>
-          <p>Tell us how much you want to sell in USD, view the live exchange rate, and choose your crypto asset.</p>
+          <h3>Choose Crypto &amp; Amount</h3>
+          <p>Select the crypto asset you want to convert, view the live rate in your local currency, and confirm the settlement amount.</p>
         </div>
-        <div class="step-card fade-up">
+        <div class="step-card fade-up" data-aos="fade-up" data-aos-delay="200" data-aos-duration="700">
           <div class="step-number">3</div>
           <h3>Send Your Crypto</h3>
-          <p>We generate a secure deposit address for you. Send your crypto and we'll notify you the moment it's received.</p>
+          <p>We generate a secure deposit address. Send BTC, USDT, ETH or BNB from any wallet — we confirm receipt in real time.</p>
         </div>
-        <div class="step-card fade-up">
+        <div class="step-card fade-up" data-aos="fade-up" data-aos-delay="300" data-aos-duration="700">
           <div class="step-number">4</div>
-          <h3>Get Paid to Your Bank</h3>
-          <p>Add your bank account details and receive your Naira payout directly — fast and automatic.</p>
+          <h3>Receive Your Local Currency</h3>
+          <p>We convert at real exchange rates and pay NGN, GHS, ZAR, RWF, PKR or your local currency directly to your bank account — in minutes.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Features ===== -->
+  <!-- ===== Why PayruExchange ===== -->
   <section class="section" id="features" style="background: var(--bg-soft);">
     <div class="container">
       <div class="grid features-split">
-        <div class="features-image features-image--wide fade-up">
-          <img src="assets/images/happytrilled.png" alt="A happy PayruExchange customer celebrating after successfully selling Bitcoin and receiving an instant Naira payout" loading="lazy" />
+        <div class="features-image features-image--wide fade-up" data-aos="fade-right" data-aos-duration="900">
+          <img src="assets/images/business-people-laptop-team-support-meeting-collaboration-planning-strategy-office-group-diverse-employee-workers-sharing-idea-teamwork-computer-schedule-project-plan_590464-160309.jpg" alt="Diverse global team celebrating a successful crypto settlement on PayruExchange" loading="lazy" />
         </div>
-        <div class="features-content fade-up">
+        <div class="features-content fade-up" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
           <div class="section-tag"><i class='bx bx-star'></i> Why PayruExchange</div>
-          <h2>Built for Speed, Security &amp; Trust</h2>
-          <p class="lead-sm">Everything you need to buy and sell digital assets, without the stress.</p>
+          <h2>Global Settlement Infrastructure, Built for Speed &amp; Trust</h2>
+          <p class="lead-sm">Everything you need to convert crypto to your local currency — no brokers, no delays, no hidden costs.</p>
           <div class="features-list">
-            <div class="feature-row">
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
               <div class="feature-icon"><i class='bx bx-bolt-circle'></i></div>
               <div>
-                <h3>Lightning Fast Payouts</h3>
-                <p>Once your deposit is confirmed, payouts to your bank account are processed within minutes.</p>
+                <h3>Lightning Fast Settlement</h3>
+                <p>From confirmation to your bank account — cross-border crypto settlements complete in under 15 minutes, regardless of your country or currency.</p>
               </div>
             </div>
-            <div class="feature-row">
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
               <div class="feature-icon"><i class='bx bx-line-chart'></i></div>
               <div>
-                <h3>Competitive Rates</h3>
-                <p>Get real-time exchange rates with no hidden charges — see exactly what you'll receive upfront.</p>
+                <h3>Real-Time Exchange Rates</h3>
+                <p>See live crypto-to-fiat rates for NGN, GHS, ZAR, RWF and PKR before you send. Competitive rates, zero hidden charges.</p>
               </div>
             </div>
-            <div class="feature-row">
-              <div class="feature-icon"><i class='bx bx-coin-stack'></i></div>
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+              <div class="feature-icon"><i class='bx bx-transfer-alt'></i></div>
               <div>
-                <h3>Multiple Assets</h3>
-                <p>Buy and sell Bitcoin, Ethereum, USDT, BNB, USDC and more — all from a single dashboard.</p>
+                <h3>Multi-Currency Payouts</h3>
+                <p>Receive your local currency directly in your bank — we handle the entire conversion so you don't have to.</p>
               </div>
             </div>
-            <div class="feature-row">
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="300" data-aos-duration="600">
               <div class="feature-icon"><i class='bx bx-bell'></i></div>
               <div>
-                <h3>Real-Time Notifications</h3>
-                <p>Track every step of your transaction with instant updates on deposits and payouts.</p>
+                <h3>Real-Time Tracking</h3>
+                <p>Follow every step of your cross-border settlement with instant notifications — from crypto deposit to local bank payout.</p>
               </div>
             </div>
           </div>
@@ -169,78 +220,82 @@
     </div>
   </section>
 
-  <!-- ===== Seamless Transactions ===== -->
+  <!-- ===== Cross-Border Settlement ===== -->
   <section class="section">
     <div class="container">
       <div class="grid features-split">
-        <div class="features-content fade-up">
-          <div class="section-tag"><i class='bx bx-flash'></i> Effortless Experience</div>
-          <h2>Seamless Transactions, Every Single Time</h2>
-          <p class="lead-sm">From the moment you place an order to the second your payout lands, PayruExchange is built to feel effortless — clear steps, instant confirmations, and zero guesswork.</p>
+        <div class="features-content fade-up" data-aos="fade-right" data-aos-duration="900">
+          <div class="section-tag"><i class='bx bx-transfer'></i> Global Reach</div>
+          <h2>Seamless Cross-Border Settlements, Every Single Time</h2>
+          <p class="lead-sm">From Lagos to Accra, Johannesburg to Kigali, and Karachi to beyond — PayruExchange bridges the gap between crypto and local banking. Send once, receive anywhere.</p>
           <div class="features-list">
-            <div class="feature-row">
-              <div class="feature-icon"><i class='bx bx-check-shield'></i></div>
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
+              <div class="feature-icon"><i class='bx bx-send'></i></div>
               <div>
-                <h3>Instant Order Confirmation</h3>
-                <p>Every transaction is confirmed in real time, so you always know exactly where your money is.</p>
+                <h3>Send Crypto from Anywhere</h3>
+                <p>Deposit BTC, USDT, ETH or BNB from any wallet, on any supported network, from anywhere in the world.</p>
               </div>
             </div>
-            <div class="feature-row">
-              <div class="feature-icon"><i class='bx bx-repeat'></i></div>
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+              <div class="feature-icon"><i class='bx bx-money-withdraw'></i></div>
               <div>
-                <h3>One-Click Repeat Orders</h3>
-                <p>Save your details and repeat your favorite transactions in just a couple of taps.</p>
+                <h3>Receive in Your Local Currency</h3>
+                <p>We calculate real-time cross-border rates and deliver the equivalent in NGN, GHS, ZAR, RWF or PKR to your local bank — instantly.</p>
               </div>
             </div>
-            <div class="feature-row">
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
               <div class="feature-icon"><i class='bx bx-mobile-alt'></i></div>
               <div>
-                <h3>Track Anywhere, Anytime</h3>
-                <p>Monitor your deposits, conversions, and payouts from any device, wherever you are.</p>
+                <h3>Track Across Borders</h3>
+                <p>Monitor every cross-border settlement from any device — complete transparency, zero guesswork, real-time updates all the way.</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="features-image fade-up">
-          <img src="assets/images/woman1.png" alt="A PayruExchange user smiling while checking her Naira balance on her phone after a successful crypto sale" loading="lazy" />
+        <div class="features-image fade-up" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+          <img src="assets/images/tech-focused-team-shot-group-businesspeople-brainstorming-exchanging-ideas-modern-office_590464-61386.jpg" alt="Professional team collaborating on cross-border crypto settlements at PayruExchange" loading="lazy" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Community / Collaboration ===== -->
+  <!-- ===== Global Community ===== -->
   <section class="section" style="background: var(--bg-soft);">
     <div class="container">
       <div class="grid features-split">
-        <div class="features-image fade-up">
-          <img src="assets/images/friends.png" alt="Two PayruExchange team members in branded polo shirts collaborating over a laptop" loading="lazy" />
+        <div class="features-image fade-up" data-aos="fade-right" data-aos-duration="900">
+          <img src="assets/images/multi-ethnic-business-professionals-discussing-600nw-2758698603.jpg" alt="Diverse global community of PayruExchange users collaborating and sharing experiences" loading="lazy" />
         </div>
-        <div class="features-content fade-up">
-          <div class="section-tag"><i class='bx bx-group'></i> Our Community</div>
-          <h2>A Growing Community Built on Trust</h2>
-          <p class="lead-sm">Behind every transaction is a real team and a growing community of users who trust PayruExchange to handle their crypto-to-cash conversions, day after day.</p>
+        <div class="features-content fade-up" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+          <div class="section-tag"><i class='bx bx-globe'></i> Our Community</div>
+          <h2>A Global Community Built on Trust</h2>
+          <p class="lead-sm">From Lagos to Accra, Johannesburg to Kigali and Karachi — over 50,000 users across 7+ countries trust PayruExchange for reliable, fast crypto-to-fiat settlements every single day.</p>
           <div class="features-list">
-            <div class="feature-row">
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
               <div class="feature-icon"><i class='bx bx-support'></i></div>
               <div>
-                <h3>Dedicated Support Team</h3>
-                <p>Our team is made up of real people, ready to help with KYC, deposits, payouts and anything else.</p>
+                <h3>Multi-Country Support Team</h3>
+                <p>Our support team is available across all time zones, ready to assist users from Nigeria to Pakistan — in your language, on your schedule.</p>
               </div>
             </div>
-            <div class="feature-row">
-              <div class="feature-icon"><i class='bx bx-like'></i></div>
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+              <div class="feature-icon"><i class='bx bx-world'></i></div>
               <div>
-                <h3>Thousands of Happy Users</h3>
-                <p>Join a fast-growing community of users across Nigeria who rely on PayruExchange every day.</p>
+                <h3>Trusted Across 7+ Countries</h3>
+                <p>Tens of thousands of users in Nigeria, Ghana, South Africa, Rwanda and Pakistan rely on PayruExchange daily for seamless cross-border settlements.</p>
               </div>
             </div>
-            <div class="feature-row">
+            <div class="feature-row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
               <div class="feature-icon"><i class='bx bx-conversation'></i></div>
               <div>
-                <h3>Community-Driven Improvements</h3>
-                <p>We listen to user feedback and continuously improve the platform based on real experiences.</p>
+                <h3>Community-Driven Growth</h3>
+                <p>We listen to our global user base and continuously improve the platform based on real feedback from every market we serve.</p>
               </div>
             </div>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:28px;" data-aos="fade-up" data-aos-delay="300" data-aos-duration="600">
+            <a href="register.html" class="btn btn-primary"><i class='bx bx-group'></i> Join Our Community</a>
+            <a href="about.html" class="btn btn-outline"><i class='bx bx-info-circle'></i> Our Story</a>
           </div>
         </div>
       </div>
@@ -250,67 +305,67 @@
   <!-- ===== Testimonials ===== -->
   <section class="section">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-aos="fade-up" data-aos-duration="700">
         <div class="section-tag"><i class='bx bx-chat'></i> Testimonials</div>
-        <h2>Trusted by Thousands of Users</h2>
-        <p>Here's what our community has to say about PayruExchange.</p>
+        <h2>Trusted by Users Across 7+ Countries</h2>
+        <p>Real people, real settlements — here's what our global community has to say about PayruExchange.</p>
       </div>
-      <div class="testimonial-slider">
+      <div class="testimonial-slider" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
         <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="avatar">KA</div>
+              <div class="testimonial-meta">
+                <strong>Kwame Asante <i class='bx bxs-badge-check'></i></strong>
+                <span>🇬🇭 Accra, Ghana · 3 days ago</span>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <p>"I converted USDT to Ghana Cedis and had the money in my Ecobank account in under 12 minutes. The best cross-border settlement platform I've ever used."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="avatar">TN</div>
+              <div class="testimonial-meta">
+                <strong>Thabo Nkosi <i class='bx bxs-badge-check'></i></strong>
+                <span>🇿🇦 Johannesburg, South Africa · 1 week ago</span>
+              </div>
+              <div class="testimonial-stars">★★★★★</div>
+            </div>
+            <p>"Finally a platform that pays out in Rands directly to my FNB account. Competitive rate, zero hassle — the whole process was under 20 minutes."</p>
+          </div>
           <div class="testimonial-card">
             <div class="testimonial-header">
               <div class="avatar">CO</div>
               <div class="testimonial-meta">
                 <strong>Chidi Okeke <i class='bx bxs-badge-check'></i></strong>
-                <span>Lagos, Nigeria · 2 weeks ago</span>
+                <span>🇳🇬 Lagos, Nigeria · 2 weeks ago</span>
               </div>
               <div class="testimonial-stars">★★★★★</div>
             </div>
-            <p>"I sold my USDT and had the money in my GTBank account in under 10 minutes. Super smooth process!"</p>
+            <p>"I've cashed out crypto dozens of times. Fast, transparent, zero stress. PayruExchange is the only cross-border settlement platform I trust."</p>
           </div>
           <div class="testimonial-card">
             <div class="testimonial-header">
-              <div class="avatar">FB</div>
+              <div class="avatar">AM</div>
               <div class="testimonial-meta">
-                <strong>Funmi Bello <i class='bx bxs-badge-check'></i></strong>
-                <span>Abuja, Nigeria · 1 month ago</span>
+                <strong>Aisha Mutoni <i class='bx bxs-badge-check'></i></strong>
+                <span>🇷🇼 Kigali, Rwanda · 5 days ago</span>
               </div>
               <div class="testimonial-stars">★★★★★</div>
             </div>
-            <p>"The rates are way better than what I was getting elsewhere, and the KYC process was painless."</p>
+            <p>"Converting USDT to Rwandan Francs used to be a nightmare. PayruExchange made it completely effortless — great rates, instant confirmation, money in my account fast."</p>
           </div>
           <div class="testimonial-card">
             <div class="testimonial-header">
-              <div class="avatar">TA</div>
+              <div class="avatar">HM</div>
               <div class="testimonial-meta">
-                <strong>Tunde Adeyemi <i class='bx bxs-badge-check'></i></strong>
-                <span>Port Harcourt, Nigeria · 3 days ago</span>
-              </div>
-              <div class="testimonial-stars">★★★★☆</div>
-            </div>
-            <p>"Customer support responded almost immediately when I had a question about my payout. Highly recommend."</p>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-header">
-              <div class="avatar">NE</div>
-              <div class="testimonial-meta">
-                <strong>Ngozi Eze <i class='bx bxs-badge-check'></i></strong>
-                <span>Enugu, Nigeria · 5 days ago</span>
+                <strong>Hamza Malik <i class='bx bxs-badge-check'></i></strong>
+                <span>🇵🇰 Karachi, Pakistan · 1 week ago</span>
               </div>
               <div class="testimonial-stars">★★★★★</div>
             </div>
-            <p>"I was skeptical at first, but PayruExchange's rates beat every other platform I tried. Now it's the only place I cash out."</p>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-header">
-              <div class="avatar">BM</div>
-              <div class="testimonial-meta">
-                <strong>Bashir Mohammed <i class='bx bxs-badge-check'></i></strong>
-                <span>Kano, Nigeria · 1 week ago</span>
-              </div>
-              <div class="testimonial-stars">★★★★★</div>
-            </div>
-            <p>"As a freelancer paid in crypto, PayruExchange makes converting to Naira effortless. Clean interface, fast payouts."</p>
+            <p>"As a freelancer paid in USDT, PayruExchange delivers PKR straight to my HBL account in minutes. It's completely changed how I handle international payments."</p>
           </div>
         </div>
         <div class="slider-controls">
@@ -325,64 +380,64 @@
   <!-- ===== FAQ ===== -->
   <section class="section" id="faq" style="background: var(--bg-soft);">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-aos="fade-up" data-aos-duration="700">
         <div class="section-tag"><i class='bx bx-help-circle'></i> FAQ</div>
         <h2>Frequently Asked Questions</h2>
         <p>Can't find the answer you're looking for? Reach out to our support team.</p>
       </div>
       <div class="faq-list">
-        <div class="faq-item open">
+        <div class="faq-item open" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
           <div class="faq-question">
-            Can I buy crypto on PayruExchange, or only sell?
+            Which countries are currently supported?
             <i class='bx bx-chevron-down'></i>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner">You can do both. Fund your account with Naira to buy Bitcoin, USDT, Ethereum and other supported assets at competitive rates, or sell your crypto for an instant payout to your bank account — all from the same dashboard.</div>
+            <div class="faq-answer-inner">PayruExchange currently supports Nigeria, Ghana, South Africa, Rwanda and Pakistan — with more countries being added regularly. If your country isn't listed yet, join our waitlist and we'll notify you when we go live in your region.</div>
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="60" data-aos-duration="600">
           <div class="faq-question">
-            How do I sell my crypto on PayruExchange?
+            What local currencies can I receive?
             <i class='bx bx-chevron-down'></i>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Create an account, complete your KYC verification, then head to your dashboard and click "Sell Crypto." Enter the amount you want to sell, choose your asset, and follow the prompts to send your crypto and receive your payout.</div>
+            <div class="faq-answer-inner">You can receive your settlement in Nigerian Naira (NGN), Ghanaian Cedi (GHS), South African Rand (ZAR), Rwandan Franc (RWF) or Pakistani Rupee (PKR) — paid directly to your local bank account.</div>
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="120" data-aos-duration="600">
           <div class="faq-question">
             What identification documents do I need?
             <i class='bx bx-chevron-down'></i>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner">You can verify your identity using your National ID Number (NIN), Voter's Card (PVC), Driver's License or International Passport.</div>
+            <div class="faq-answer-inner">You can verify your identity using any valid national ID from your country — including National ID Numbers, Driver's License, Passport or Voter's Card, depending on what's accepted in your region.</div>
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="180" data-aos-duration="600">
           <div class="faq-question">
-            How long does a payout take?
+            How long does a cross-border settlement take?
             <i class='bx bx-chevron-down'></i>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Once your crypto deposit is confirmed and your bank details are submitted, payouts are typically processed within 15 minutes during business hours.</div>
+            <div class="faq-answer-inner">Once your crypto deposit is confirmed and your bank details are on file, settlements are typically processed and credited to your local bank account within 15 minutes — across all supported countries.</div>
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="240" data-aos-duration="600">
           <div class="faq-question">
-            Which cryptocurrencies are supported?
+            Which cryptocurrencies can I convert?
             <i class='bx bx-chevron-down'></i>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner">We currently support Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB and USD Coin (USDC), with more assets being added regularly.</div>
+            <div class="faq-answer-inner">We currently support Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB and USD Coin (USDC), with more crypto assets being added regularly.</div>
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="600">
           <div class="faq-question">
-            Are there any fees?
+            Are there any fees or hidden charges?
             <i class='bx bx-chevron-down'></i>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Our exchange rate already reflects our service fee — the amount you see at checkout is exactly what you'll receive, with no surprise deductions.</div>
+            <div class="faq-answer-inner">Our exchange rate already reflects our service fee — the local currency amount you see at the start of your settlement is exactly what you'll receive in your bank. No surprise deductions, no hidden charges.</div>
           </div>
         </div>
       </div>
@@ -392,12 +447,12 @@
   <!-- ===== CTA ===== -->
   <section class="section">
     <div class="container">
-      <div class="cta-banner fade-up">
-        <h2>Ready to buy or sell crypto?</h2>
-        <p>Join thousands of users who trust PayruExchange to buy and sell crypto quickly, securely, and at competitive rates.</p>
+      <div class="cta-banner fade-up" data-aos="zoom-in" data-aos-duration="900">
+        <h2>Ready to Convert Crypto to Your Local Currency?</h2>
+        <p>Join 50,000+ users across 7 countries who trust PayruExchange for fast, transparent, cross-border crypto settlements.</p>
         <div class="cta-actions">
-          <a href="register.html" class="btn btn-primary btn-lg"><i class='bx bx-user-plus'></i> Create Free Account</a>
-          <a href="login.html" class="btn btn-outline btn-lg">Log In</a>
+          <a href="register.html" class="btn btn-primary btn-lg"><i class='bx bx-rocket'></i> Start Converting Now</a>
+          <a href="#countries" class="btn btn-outline btn-lg"><i class='bx bx-world'></i> See All Countries</a>
         </div>
       </div>
     </div>
@@ -412,7 +467,7 @@
             <div class="logo-mark">P</div>
             <span>Payru<span>Exchange</span></span>
           </a>
-          <p>PayruExchange is a fast, secure platform for buying and selling crypto, with payouts paid directly to your bank account.</p>
+          <p>PayruExchange is a global cross-border crypto settlement platform — convert your crypto to local fiat currency and receive it in your bank account, across 7+ countries.</p>
           <div class="social-row">
             <a href="#"><i class='bx bxl-twitter'></i></a>
             <a href="#"><i class='bx bxl-telegram'></i></a>
@@ -426,6 +481,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#countries">Countries</a></li>
             <li><a href="index.html#faq">FAQ</a></li>
           </ul>
         </div>
@@ -446,7 +502,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 PayruExchange. All rights reserved.</p>
+        <p>&copy; 2026 PayruExchange. All rights reserved. Available in 🇳🇬 🇬🇭 🇿🇦 🇷🇼 🇵🇰 and growing.</p>
         <div class="footer-legal">
           <a href="privacy-policy.html">Privacy</a>
           <a href="terms.html">Terms</a>
@@ -455,9 +511,19 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
   <script src="js/db.js"></script>
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>
   <script src="js/theme.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 750,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+    });
+  </script>
 </body>
 </html>

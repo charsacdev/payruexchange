@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initRateCarousel();
   initTicker();
   initTestimonialSlider();
+  initAnimations();
 });
 
 /* ---------- Hero "live rates" carousel ---------- */
@@ -115,6 +116,62 @@ function initTicker() {
 
   // Duplicate the set so the marquee can loop seamlessly at -50%.
   track.innerHTML = items + items;
+}
+
+/* ---------- Scroll animations — AOS handles reveal, we just kick particles ---------- */
+function initAnimations() {
+  // Refresh AOS after any dynamic content is ready
+  if (typeof AOS !== "undefined") {
+    AOS.refresh();
+  }
+  initHeroParticles();
+}
+
+function initHeroParticles() {
+  if (typeof tsParticles === "undefined") return;
+  if (!document.getElementById("hero-particles")) return;
+
+  tsParticles.load("hero-particles", {
+    background: { color: { value: "transparent" } },
+    fpsLimit: 60,
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "grab" },
+        onClick: { enable: true, mode: "push" },
+        resize: true,
+      },
+      modes: {
+        grab: { distance: 160, links: { opacity: 0.6 } },
+        push: { quantity: 3 },
+      },
+    },
+    particles: {
+      color: { value: ["#00E0A8", "#7C6CF6", "#4EA1FF"] },
+      links: {
+        color: "#00E0A8",
+        distance: 150,
+        enable: true,
+        opacity: 0.12,
+        width: 1,
+      },
+      move: {
+        direction: "none",
+        enable: true,
+        outModes: { default: "bounce" },
+        random: true,
+        speed: 1.4,
+        straight: false,
+      },
+      number: {
+        density: { enable: true, area: 800 },
+        value: 55,
+      },
+      opacity: { value: { min: 0.2, max: 0.55 } },
+      shape: { type: "circle" },
+      size: { value: { min: 1, max: 3.5 } },
+    },
+    detectRetina: true,
+  });
 }
 
 /* ---------- Testimonial slider ---------- */

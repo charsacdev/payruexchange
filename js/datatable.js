@@ -30,14 +30,27 @@
       Object.assign(
         {
           paging: true,
-          pageLength: 8,
+          pageLength: 10,
+          lengthMenu: [[10, 25, 50, 100], ["10", "25", "50", "100"]],
           searching: false,
-          ordering: false,
-          lengthChange: false,
+          ordering: true,
+          lengthChange: true,
           info: true,
           autoWidth: false,
-          pagingType: "simple_numbers",
-          dom: 't<"dt-footer"ip>',
+          pagingType: "full_numbers",
+          dom: '<"dt-top-bar"l>t<"dt-footer"ip>',
+          language: {
+            lengthMenu: "Show _MENU_ entries",
+            info: "Showing _START_–_END_ of _TOTAL_",
+            infoEmpty: "No entries to show",
+            infoFiltered: "(filtered from _MAX_)",
+            paginate: {
+              first:    '<i class="bx bx-chevrons-left"></i>',
+              last:     '<i class="bx bx-chevrons-right"></i>',
+              previous: '<i class="bx bx-chevron-left"></i>',
+              next:     '<i class="bx bx-chevron-right"></i>',
+            },
+          },
         },
         options || {}
       )
