@@ -47,7 +47,6 @@ function initLiveRates() {
               <i class='bx ${isUp ? "bx-trending-up" : "bx-trending-down"}'></i>
               ${sign}${Math.abs(change).toFixed(2)}% 24h
             </span>
-            <a href="register.html" class="btn btn-primary btn-sm">Convert</a>
           </div>
         </div>`;
     })

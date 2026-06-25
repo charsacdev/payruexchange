@@ -2,12 +2,13 @@
    PayRu — Marketing Pages
    ========================================================= */
 
-/* Prevent horizontal scroll from decorative off-canvas elements
-   (hero glow blobs, etc.) — scoped to marketing pages only since
-   it breaks position:sticky if applied to the shared app shell. */
+/* Prevent horizontal scroll from decorative off-canvas elements.
+   overflow-x:clip (not hidden) avoids creating a scroll-container
+   that breaks position:fixed children (e.g. the mobile nav drawer). */
 body {
-  overflow-x: hidden;
-  position: relative;
+  overflow-x: clip;
+  /* Push content below the fixed navbar */
+  padding-top: var(--header-h);
 }
 
 /* ---------- Hero ---------- */
@@ -1304,6 +1305,9 @@ body {
     text-align: center;
   }
 
+  /* Show card stack BEFORE the hero text on mobile */
+  .hero-visual { order: -1; }
+
   .hero-text,
   .hero-visual {
     min-width: 0;
@@ -1345,8 +1349,18 @@ body {
 
 @media (max-width: 640px) {
   .countries-grid { grid-template-columns: repeat(2, 1fr); }
-  .rate-slide-card { flex: 0 0 100%; }
-  .rates-slider { gap: 8px; }
+
+  /* Expand rate slider cards on mobile */
+  .rate-slide-card {
+    flex: 0 0 100%;
+    padding: 28px 22px;
+    min-height: 210px;
+  }
+  .rate-slide-price { font-size: 30px; }
+  .rate-slide-header .coin-icon { width: 52px; height: 52px; font-size: 22px; }
+  .rates-slider { gap: 6px; }
+  .rates-slider .slider-btn { width: 34px; height: 34px; font-size: 16px; }
+
   .trade-stats { gap: 20px; }
 
   .steps-grid,
@@ -1596,7 +1610,7 @@ body {
   100% { transform: translate(30px, 20px) scale(1.15); }
 }
 
-/* ---- Nav link — animated underline ---- */
+/* ---- Nav link — animated underline (desktop only) ---- */
 .nav-links a {
   position: relative;
 }
@@ -1611,6 +1625,13 @@ body {
 }
 .nav-links a:hover::after,
 .nav-links a.active::after { left: 0; right: 0; }
+
+/* On mobile the full-border active style (style.css) replaces the underline */
+@media (max-width: 860px) {
+  .nav-links a::after,
+  .nav-links a:hover::after,
+  .nav-links a.active::after { display: none; }
+}
 
 /* ---- FAQ hover ---- */
 .faq-item {

@@ -492,8 +492,10 @@ textarea.form-control {
 
 /* ---------- Top Navigation (public pages) ---------- */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 250;
   height: var(--header-h);
   display: flex;
@@ -963,10 +965,17 @@ textarea.form-control {
     font-size: 15.5px;
   }
 
-  .nav-links a:hover,
-  .nav-links a.active {
+  .nav-links a:hover {
     background: var(--surface-2);
     color: var(--text);
+  }
+
+  .nav-links a.active {
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
   }
 
   .nav-close {

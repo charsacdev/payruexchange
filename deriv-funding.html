@@ -43,10 +43,10 @@
         <div class="card" style="margin-bottom:24px; padding-bottom:0; padding-top:0;">
           <div style="display:flex;">
             <button class="deriv-tab active" data-tab="fund">
-              <i class='bx bx-plus-circle'></i> Fund Deriv Account
+              <i class='bx bx-plus-circle'></i> Fund Deriv
             </button>
             <button class="deriv-tab" data-tab="withdraw">
-              <i class='bx bx-minus-circle'></i> Withdraw from Deriv
+              <i class='bx bx-minus-circle'></i> Withdraw Deriv
             </button>
           </div>
         </div>
@@ -63,8 +63,8 @@
             <div id="fundStep1">
               <div class="form-group">
                 <label class="form-label">Your Deriv CR Number</label>
-                <div style="display:flex; gap:10px;">
-                  <input type="text" id="fundCR" class="form-control" placeholder="e.g. CR1234567" style="flex:1; text-transform:uppercase;" />
+                <div class="cr-input-row">
+                  <input type="text" id="fundCR" class="form-control" placeholder="e.g. CR1234567" style="text-transform:uppercase;" />
                   <button class="btn btn-outline" id="verifyCRBtn" type="button"><i class='bx bx-search-alt'></i> Verify</button>
                 </div>
                 <div id="crVerifyMsg" style="font-size:13px; margin-top:8px;"></div>
@@ -193,8 +193,8 @@
 
               <div class="form-group">
                 <label class="form-label">Your Deriv CR Number</label>
-                <div style="display:flex; gap:10px;">
-                  <input type="text" id="wdCR" class="form-control" placeholder="e.g. CR1234567" style="flex:1; text-transform:uppercase;" />
+                <div class="cr-input-row">
+                  <input type="text" id="wdCR" class="form-control" placeholder="e.g. CR1234567" style="text-transform:uppercase;" />
                   <button class="btn btn-outline" id="verifyWdCRBtn" type="button"><i class='bx bx-search-alt'></i> Verify</button>
                 </div>
                 <div id="wdCrMsg" style="font-size:13px; margin-top:8px;"></div>
