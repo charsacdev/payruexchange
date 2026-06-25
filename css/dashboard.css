@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — App Shell (Dashboard & Admin)
+﻿/* =========================================================
+   PayRu — App Shell (Dashboard & Admin)
    ========================================================= */
 
 .app-layout {
@@ -593,6 +593,33 @@
 .filter-bar .search-input {
   flex: 1;
   min-width: 220px;
+}
+
+/* ---------- Deriv funding tabs ---------- */
+.deriv-tab {
+  flex: 1;
+  padding: 18px 24px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.deriv-tab:hover {
+  color: var(--text);
+}
+
+.deriv-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
 }
 
 /* ---------- Rich text editor ---------- */

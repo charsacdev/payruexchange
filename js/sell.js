@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Sell Crypto flow
+﻿/* =========================================================
+   PayRu — Sell Crypto flow
    ========================================================= */
 
 const ACTIVE_STATUSES = ["pending_deposit", "awaiting_confirmation", "deposit_confirmed", "processing_payout"];

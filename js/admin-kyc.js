@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Admin KYC review page
+﻿/* =========================================================
+   PayRu — Admin KYC review page
    ========================================================= */
 
 let kycUsers = [];
@@ -108,13 +108,19 @@ function openModal(userId) {
     <div class="detail-row"><span>Submitted</span><span>${kyc.submittedAt ? PayruDB.formatDate(kyc.submittedAt) : "—"}</span></div>
     <div class="detail-row"><span>Status</span><span><span class="badge ${status.class}">${status.label}</span></span></div>
     <div class="divider"></div>
-    <div class="detail-row"><span>Front of ID Document</span><span></span></div>
+    <div class="detail-row">
+      <span>Front of ID Document</span>
+      ${kyc.documentImage ? `<a href="${kyc.documentImage}" download="kyc-front-${user.id}.jpg" class="btn btn-outline" style="padding:5px 12px; font-size:12.5px;"><i class='bx bx-download'></i> Download</a>` : "<span></span>"}
+    </div>
     ${
       kyc.documentImage
         ? `<img src="${kyc.documentImage}" alt="Front of identity document" class="kyc-doc-preview" />`
         : `<div class="kyc-doc-missing"><i class='bx bx-image-alt'></i> No document uploaded</div>`
     }
-    <div class="detail-row"><span>Back of ID Document</span><span></span></div>
+    <div class="detail-row">
+      <span>Back of ID Document</span>
+      ${kyc.documentImageBack ? `<a href="${kyc.documentImageBack}" download="kyc-back-${user.id}.jpg" class="btn btn-outline" style="padding:5px 12px; font-size:12.5px;"><i class='bx bx-download'></i> Download</a>` : "<span></span>"}
+    </div>
     ${
       kyc.documentImageBack
         ? `<img src="${kyc.documentImageBack}" alt="Back of identity document" class="kyc-doc-preview" />`

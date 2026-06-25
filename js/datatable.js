@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Reusable data table / pagination helpers
+﻿/* =========================================================
+   PayRu — Reusable data table / pagination helpers
 
    For <table> elements, use the jQuery DataTables wrapper:
      // after rendering ALL (already filtered) rows into <tbody>:

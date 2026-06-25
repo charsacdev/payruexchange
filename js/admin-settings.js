@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Admin Settings page
+﻿/* =========================================================
+   PayRu — Admin Settings page
    (admin profile, password, platform exchange rates)
    ========================================================= */
 
@@ -12,10 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   populatePersonalForm(admin);
   populateRatesForm();
+  populateDerivRateForm();
+  populateDerivSettingsForm();
 
   bindPersonalForm(admin);
   bindPasswordForm(admin);
   bindRatesForm();
+  bindDerivRateForm();
+  bindDerivSettingsForm();
 });
 
 /* ---------- Show/hide password ---------- */
@@ -142,22 +146,22 @@ function bindPasswordForm(admin) {
   });
 }
 
-/* ---------- Exchange rates ---------- */
+/* ---------- Crypto exchange rates ---------- */
 function populateRatesForm() {
-  document.getElementById("buyRate").value = PayruDB.getBuyRate();
+  document.getElementById("buyRate").value  = PayruDB.getBuyRate();
   document.getElementById("sellRate").value = PayruDB.getSellRate();
   updateSpreadDisplay();
 }
 
 function updateSpreadDisplay() {
-  const buyRate = parseFloat(document.getElementById("buyRate").value) || 0;
+  const buyRate  = parseFloat(document.getElementById("buyRate").value)  || 0;
   const sellRate = parseFloat(document.getElementById("sellRate").value) || 0;
   document.getElementById("rateSpread").textContent = PayruDB.formatNaira(buyRate - sellRate);
 }
 
 function bindRatesForm() {
-  const form = document.getElementById("ratesForm");
-  const buyRate = document.getElementById("buyRate");
+  const form     = document.getElementById("ratesForm");
+  const buyRate  = document.getElementById("buyRate");
   const sellRate = document.getElementById("sellRate");
 
   [buyRate, sellRate].forEach((input) => input.addEventListener("input", updateSpreadDisplay));
@@ -166,17 +170,64 @@ function bindRatesForm() {
     e.preventDefault();
     [buyRate, sellRate].forEach((i) => fieldError(i, ""));
 
-    const buyVal = parseFloat(buyRate.value);
+    const buyVal  = parseFloat(buyRate.value);
     const sellVal = parseFloat(sellRate.value);
-
     let valid = true;
-    if (!buyVal || buyVal <= 0) { fieldError(buyRate, "Enter a valid buy rate."); valid = false; }
+    if (!buyVal  || buyVal  <= 0) { fieldError(buyRate,  "Enter a valid buy rate.");  valid = false; }
     if (!sellVal || sellVal <= 0) { fieldError(sellRate, "Enter a valid sell rate."); valid = false; }
-    if (valid && sellVal > buyVal) { fieldError(sellRate, "Sell rate should not be higher than the buy rate."); valid = false; }
+    if (valid && sellVal > buyVal) { fieldError(sellRate, "Sell rate should not exceed the buy rate."); valid = false; }
     if (!valid) return;
 
     PayruDB.setRates({ buyRate: buyVal, sellRate: sellVal });
     updateSpreadDisplay();
-    showToast("Exchange rates updated.", "success");
+    updateDerivSpreadDisplay();
+    showToast("Crypto exchange rates updated.", "success");
+  });
+}
+
+/* ---------- Deriv exchange rate ---------- */
+function populateDerivRateForm() {
+  document.getElementById("derivRate").value = PayruDB.getDerivRate();
+  updateDerivSpreadDisplay();
+}
+
+function updateDerivSpreadDisplay() {
+  const buyRate   = parseFloat(document.getElementById("buyRate").value)   || PayruDB.getBuyRate();
+  const derivRate = parseFloat(document.getElementById("derivRate").value) || 0;
+  document.getElementById("derivSpread").textContent = PayruDB.formatNaira(buyRate - derivRate);
+}
+
+function bindDerivRateForm() {
+  const form      = document.getElementById("derivRateForm");
+  const derivRate = document.getElementById("derivRate");
+
+  derivRate.addEventListener("input", updateDerivSpreadDisplay);
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    fieldError(derivRate, "");
+    const val = parseFloat(derivRate.value);
+    if (!val || val <= 0) { fieldError(derivRate, "Enter a valid Deriv rate."); return; }
+    PayruDB.setRates({ derivRate: val });
+    updateDerivSpreadDisplay();
+    showToast("Deriv exchange rate updated.", "success");
+  });
+}
+
+/* ---------- Deriv account settings (Company CR + Payment ID) ---------- */
+function populateDerivSettingsForm() {
+  const s = PayruDB.getDerivSettings();
+  document.getElementById("companyCR").value = s.companyCR || "";
+  document.getElementById("paymentID").value = s.paymentID || "";
+}
+
+function bindDerivSettingsForm() {
+  document.getElementById("derivSettingsForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const cr  = document.getElementById("companyCR").value.trim();
+    const pid = document.getElementById("paymentID").value.trim();
+    if (!cr || !pid) { showToast("Please fill in both fields.", "error"); return; }
+    PayruDB.updateDerivSettings({ companyCR: cr, paymentID: pid });
+    showToast("Deriv account settings saved.", "success");
   });
 }

@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Dashboard (overview) page
+﻿/* =========================================================
+   PayRu — Dashboard (overview) page
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Transactions — PayruExchange Admin</title>
+  <title>Transactions — PayRu Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -87,17 +87,25 @@
           </div>
 
           <div class="filter-bar">
-            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search by name, email or asset..." />
+            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search by name, email, asset or CR..." />
             <select id="typeFilter" class="form-control">
               <option value="all">All Types</option>
-              <option value="buy">Buy</option>
-              <option value="sell">Sell</option>
+              <option value="crypto">Crypto Only</option>
+              <option value="deriv">Deriv Only</option>
+              <option value="buy">Buy Crypto</option>
+              <option value="sell">Sell Crypto</option>
+              <option value="fund">Deriv Fund</option>
+              <option value="withdraw">Deriv Withdraw</option>
             </select>
             <select id="statusFilter" class="form-control">
               <option value="all">All Statuses</option>
               <option value="completed">Completed</option>
               <option value="in_progress">In Progress</option>
               <option value="cancelled">Cancelled</option>
+              <option value="pending">Deriv Pending</option>
+              <option value="funded">Deriv Funded</option>
+              <option value="paid">Wallet Credited</option>
+              <option value="rejected">Rejected</option>
             </select>
           </div>
 

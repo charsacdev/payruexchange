@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Mock Database (localStorage)
+﻿/* =========================================================
+   PayRu — Mock Database (localStorage)
    Simulates a backend for the prototype. No real crypto or
    banking integrations — everything is local & simulated.
    ========================================================= */
@@ -41,7 +41,7 @@
   const PLATFORM_BANK_ACCOUNT = {
     bankName: "Guaranty Trust Bank (GTBank)",
     accountNumber: "0244780055",
-    accountName: "PayruExchange Limited",
+    accountName: "PayRu Limited",
   };
 
   /* ---------- Bulk seed reference data (for generating demo users/transactions) ---------- */
@@ -115,7 +115,7 @@
     return {
       bankName: "Providus Bank",
       accountNumber: generateVirtualAccountNumber(user.id),
-      accountName: `PayruExchange - ${user.firstName} ${user.lastName}`,
+      accountName: `PayRu - ${user.firstName} ${user.lastName}`,
     };
   }
 
@@ -271,6 +271,20 @@
   // existing localStorage data keeps working without a full reset.
   function migrate(db) {
     let changed = false;
+    if (!db.derivSettings) {
+      db.derivSettings = { companyCR: "CR9001234", paymentID: "PAY-PAYRU-001" };
+      changed = true;
+    }
+    if (!db.derivTransactions) {
+      db.derivTransactions = [];
+      changed = true;
+    }
+    // Fix admin email if it still has the old PayruExchange domain
+    const admin = db.users.find((u) => u.role === "admin");
+    if (admin && admin.email && admin.email.toLowerCase().includes("payruexchange")) {
+      admin.email = "admin@PayRu.com";
+      changed = true;
+    }
     db.users.forEach((user) => {
       if (!user.virtualAccount) {
         user.virtualAccount = buildVirtualAccount(user);
@@ -285,7 +299,10 @@
       }
     });
     if (!db.settings) {
-      db.settings = { buyRate: DEFAULT_BUY_RATE, sellRate: DEFAULT_SELL_RATE };
+      db.settings = { buyRate: DEFAULT_BUY_RATE, sellRate: DEFAULT_SELL_RATE, derivRate: 1580 };
+      changed = true;
+    } else if (!db.settings.derivRate) {
+      db.settings.derivRate = 1580;
       changed = true;
     }
     const demoUser = db.users.find((u) => u.id === "usr_demo0001");
@@ -462,7 +479,7 @@
       id: adminId,
       firstName: "Payru",
       lastName: "Admin",
-      email: "admin@payruexchange.com",
+      email: "admin@PayRu.com",
       phone: "+2348000000000",
       passwordHash: hashPassword("Admin123!"),
       role: "admin",
@@ -479,7 +496,7 @@
       id: demoId,
       firstName: "Ada",
       lastName: "Okafor",
-      email: "demo@payruexchange.com",
+      email: "demo@PayRu.com",
       phone: "+2348012345678",
       passwordHash: hashPassword("Demo123!"),
       role: "user",
@@ -573,7 +590,7 @@
         id: uid("ntf"),
         userId: demoId,
         type: "success",
-        title: "Welcome to PayruExchange",
+        title: "Welcome to PayRu",
         message: "Your account was created successfully. Complete your KYC to start trading.",
         read: true,
         createdAt: new Date(Date.now() - 10 * 86400000).toISOString(),
@@ -586,7 +603,9 @@
       users: [admin, demo, ...bulk.users],
       transactions: [...transactions, ...bulk.transactions],
       notifications,
-      settings: { buyRate: DEFAULT_BUY_RATE, sellRate: DEFAULT_SELL_RATE },
+      settings: { buyRate: DEFAULT_BUY_RATE, sellRate: DEFAULT_SELL_RATE, derivRate: 1580 },
+      derivSettings: { companyCR: "CR9001234", paymentID: "PAY-PAYRU-001" },
+      derivTransactions: [],
     };
   }
 
@@ -689,7 +708,7 @@
     save(db);
     addNotification(user.id, {
       type: "success",
-      title: "Welcome to PayruExchange",
+      title: "Welcome to PayRu",
       message: "Your account was created successfully. Complete your KYC to start trading.",
     });
     return { ok: true, user };
@@ -816,7 +835,7 @@
       addNotification(userId, {
         type: "success",
         title: "Account reactivated",
-        message: "Your account has been reactivated. You can continue using PayruExchange.",
+        message: "Your account has been reactivated. You can continue using PayRu.",
       });
     }
     return user;
@@ -835,10 +854,15 @@
     return load().settings.sellRate;
   }
 
-  function setRates({ buyRate, sellRate }) {
+  function getDerivRate() {
+    return load().settings.derivRate || 1580;
+  }
+
+  function setRates({ buyRate, sellRate, derivRate }) {
     const db = load();
-    db.settings.buyRate = buyRate;
-    db.settings.sellRate = sellRate;
+    if (buyRate  !== undefined) db.settings.buyRate  = buyRate;
+    if (sellRate !== undefined) db.settings.sellRate = sellRate;
+    if (derivRate !== undefined) db.settings.derivRate = derivRate;
     save(db);
     return db.settings;
   }
@@ -1224,6 +1248,126 @@
     blocked: { label: "Blocked", class: "badge-danger" },
   };
 
+  /* ---------- Wallet helpers ---------- */
+  function getWalletBalance(userId) {
+    const user = getUser(userId);
+    return user ? (user.wallet?.balance || 0) : 0;
+  }
+
+  function debitWallet(userId, amountNGN) {
+    const user = getUser(userId);
+    if (!user) return { success: false, reason: "User not found" };
+    const bal = user.wallet?.balance || 0;
+    if (bal < amountNGN) return { success: false, reason: "Insufficient funds", balance: bal };
+    user.wallet.balance      -= amountNGN;
+    user.wallet.totalWithdrawals = (user.wallet.totalWithdrawals || 0) + amountNGN;
+    saveUser(user);
+    return { success: true, balance: user.wallet.balance };
+  }
+
+  function creditWallet(userId, amountNGN) {
+    const user = getUser(userId);
+    if (!user) return false;
+    user.wallet.balance     = (user.wallet.balance || 0) + amountNGN;
+    user.wallet.totalDeposits = (user.wallet.totalDeposits || 0) + amountNGN;
+    saveUser(user);
+    return true;
+  }
+
+  /* ---------- Deriv Funding ---------- */
+  const DERIV_STATUS_LABELS = {
+    pending:    { label: "Pending",    class: "badge-warning" },
+    processing: { label: "Processing", class: "badge-info" },
+    funded:     { label: "Funded",     class: "badge-success" },
+    received:   { label: "CR Received",class: "badge-info" },
+    paid:       { label: "Bank Paid",  class: "badge-success" },
+    rejected:   { label: "Rejected",  class: "badge-danger" },
+  };
+
+  function getDerivSettings() {
+    return load().derivSettings;
+  }
+
+  function updateDerivSettings(updates) {
+    const db = load();
+    Object.assign(db.derivSettings, updates);
+    save(db);
+    return db.derivSettings;
+  }
+
+  function verifyCR(crNumber) {
+    // Mock CR verification — in production this would call the Deriv API.
+    // Accepts any CR number that starts with "CR" followed by digits.
+    return /^CR\d{5,10}$/i.test(crNumber.trim());
+  }
+
+  function createDerivTransaction({ userId, type, userCR, amountUSD }) {
+    const db      = load();
+    const sellRate = db.settings.sellRate || DEFAULT_SELL_RATE;
+    const amtNGN  = parseFloat(amountUSD) * sellRate;
+
+    // Fund requests: debit wallet upfront (wallet must have enough NGN)
+    if (type === "fund") {
+      const result = debitWallet(userId, amtNGN);
+      if (!result.success) return { error: result.reason, balance: result.balance };
+    }
+
+    const record = {
+      id: uid("drv"),
+      userId,
+      type,
+      userCR: (userCR || "").trim().toUpperCase(),
+      amountUSD: parseFloat(amountUSD),
+      amountNGN: amtNGN,
+      status: "pending",
+      createdAt: nowISO(),
+      updatedAt: nowISO(),
+      note: "",
+    };
+    db.derivTransactions.unshift(record);
+    save(db);
+    return record;
+  }
+
+  function getUserDerivTransactions(userId) {
+    return load().derivTransactions.filter((t) => t.userId === userId);
+  }
+
+  function getAllDerivTransactions() {
+    const db = load();
+    const userMap = {};
+    db.users.forEach((u) => { userMap[u.id] = u; });
+    return db.derivTransactions.map((t) => ({ ...t, user: userMap[t.userId] || null }));
+  }
+
+  function updateDerivTransaction(id, updates) {
+    const db = load();
+    const tx = db.derivTransactions.find((t) => t.id === id);
+    if (!tx) return null;
+    const prev = tx.status;
+    Object.assign(tx, updates, { updatedAt: nowISO() });
+    save(db);
+    // Credit wallet when admin marks a withdrawal as paid
+    if (tx.type === "withdraw" && updates.status === "paid" && prev !== "paid") {
+      creditWallet(tx.userId, tx.amountNGN);
+    }
+    return tx;
+  }
+
+  function getDerivStats() {
+    const db = load();
+    const all = db.derivTransactions;
+    const funded    = all.filter((t) => t.type === "fund"     && t.status === "funded");
+    const paid      = all.filter((t) => t.type === "withdraw" && t.status === "paid");
+    const pending   = all.filter((t) => t.status === "pending" || t.status === "processing" || t.status === "received");
+    return {
+      totalFunded:    funded.reduce((s, t) => s + t.amountUSD, 0),
+      totalWithdrawn: paid.reduce((s, t) => s + t.amountUSD, 0),
+      pendingCount:   pending.length,
+      totalCount:     all.length,
+    };
+  }
+
   /* ---------- Public API ---------- */
   global.PayruDB = {
     ASSETS,
@@ -1241,7 +1385,7 @@
     // kyc
     submitKYC, setKYCStatus, accountNameMatches,
     // transactions
-    getAssets, getBuyRate, getSellRate, setRates, getTransactions, getAllTransactions, getTransaction, saveTransaction,
+    getAssets, getBuyRate, getSellRate, getDerivRate, setRates, getTransactions, getAllTransactions, getTransaction, saveTransaction,
     createSellOrder, markDepositSent, confirmDeposit, submitBankDetails, completePayout, cancelTransaction,
     createBuyOrder, markPaymentSent, confirmPayment, completeCryptoPayout,
     formatCryptoAmount,
@@ -1251,6 +1395,13 @@
     setFlash, consumeFlash,
     // admin
     getAllUsers, getStats,
+    // wallet
+    getWalletBalance, debitWallet, creditWallet,
+    // deriv funding
+    DERIV_STATUS_LABELS,
+    getDerivSettings, updateDerivSettings, verifyCR,
+    createDerivTransaction, getUserDerivTransactions, getAllDerivTransactions,
+    updateDerivTransaction, getDerivStats,
     // formatting
     formatNaira, formatUSD, formatDate, timeAgo,
   };

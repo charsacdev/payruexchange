@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Buy Crypto flow
+﻿/* =========================================================
+   PayRu — Buy Crypto flow
    ========================================================= */
 
 const BUY_ACTIVE_STATUSES = ["pending_payment", "awaiting_payment_confirmation", "processing_crypto_payout"];

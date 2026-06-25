@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deriv Funding — PayRu Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/datatable-theme.css" />
+</head>
+<body data-page="deriv-funding" data-title="Deriv Funding" data-subtitle="Manage Deriv account funding and withdrawal requests.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+
+        <!-- ===== Stats ===== -->
+        <div class="grid stats-grid" id="derivStats">
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-info"><i class='bx bx-plus-circle'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Funded</div>
+              <div class="stat-value" id="statTotalFunded">$0.00</div>
+              <div class="stat-sub">Completed fund requests</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-success"><i class='bx bx-minus-circle'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Total Withdrawn</div>
+              <div class="stat-value" id="statTotalWithdrawn">$0.00</div>
+              <div class="stat-sub">Completed withdrawals</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-warning"><i class='bx bx-time'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">Pending Requests</div>
+              <div class="stat-value" id="statPending">0</div>
+              <div class="stat-sub">Awaiting action</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-head">
+              <div class="stat-icon icon-primary"><i class='bx bx-list-ul'></i></div>
+            </div>
+            <div>
+              <div class="stat-label">All Transactions</div>
+              <div class="stat-value" id="statTotal">0</div>
+              <div class="stat-sub">All time</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Company Settings ===== -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-head"><h3>Company Deriv Settings</h3></div>
+          <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">
+            The company CR number and Payment ID are shown to users when they withdraw. Keep these updated.
+          </p>
+          <form id="derivSettingsForm" style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-end;">
+            <div class="form-group" style="flex:1; min-width:200px; margin-bottom:0;">
+              <label class="form-label">Company Deriv CR Number</label>
+              <input type="text" id="settingCompanyCR" class="form-control" placeholder="e.g. CR9001234" />
+            </div>
+            <div class="form-group" style="flex:1; min-width:200px; margin-bottom:0;">
+              <label class="form-label">Payment ID</label>
+              <input type="text" id="settingPaymentID" class="form-control" placeholder="e.g. PAY-PAYRU-001" />
+            </div>
+            <div class="form-group" style="flex:0 0 auto; margin-bottom:0;">
+              <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Save Settings</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ===== Transactions Table ===== -->
+        <div class="card">
+          <div class="card-head"><h3>All Deriv Requests</h3></div>
+
+          <div class="filter-bar">
+            <select id="typeFilter" class="form-control">
+              <option value="all">All Types</option>
+              <option value="fund">Fund Requests</option>
+              <option value="withdraw">Withdrawals</option>
+            </select>
+            <select id="statusFilter" class="form-control">
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="funded">Funded</option>
+              <option value="received">CR Received</option>
+              <option value="paid">Bank Paid</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+
+          <div class="table-wrap" id="derivTableWrap">
+            <table class="data-table" id="derivAdminTable">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>User</th>
+                  <th>CR Number</th>
+                  <th>Amount (USD)</th>
+                  <th>Naira Value</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="derivAdminBody"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="derivAdminEmpty" style="display:none;">
+            <i class='bx bx-credit-card'></i>
+            <h4>No Deriv transactions yet</h4>
+            <p>Requests from users will appear here.</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="../js/datatable.js"></script>
+  <script src="../js/admin-deriv-funding.js"></script>
+</body>
+</html>

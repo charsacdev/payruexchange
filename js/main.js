@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Shared public-page interactions
+﻿/* =========================================================
+   PayRu — Shared public-page interactions
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {

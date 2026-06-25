@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Admin auth pages logic
+﻿/* =========================================================
+   PayRu — Admin auth pages logic
    (admin/login.html, admin/forgot-password.html, admin/reset-password.html)
    ========================================================= */
 

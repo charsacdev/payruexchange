@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Marketing Pages
+﻿/* =========================================================
+   PayRu — Marketing Pages
    ========================================================= */
 
 /* Prevent horizontal scroll from decorative off-canvas elements
@@ -89,8 +89,170 @@ body {
 .hero-visual {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
+  padding-top: 20px;
+}
+
+/* ---------- Crypto card stack ---------- */
+.crypto-card-stack {
+  position: relative;
+  width: 360px;
+  height: 300px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.crypto-card {
+  position: absolute;
+  top: 0; left: 0;
+  width: 360px;
+  height: 210px;
+  border-radius: 22px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  user-select: none;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.5s ease;
+}
+
+/* Decorative circles on card face */
+.crypto-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+.crypto-card::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -50px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+/* Position layers */
+.crypto-card[data-pos="0"] { transform: translateY(0)  scale(1);    z-index: 5; opacity: 1;   }
+.crypto-card[data-pos="1"] { transform: translateY(18px) scale(0.95); z-index: 4; opacity: 1;   }
+.crypto-card[data-pos="2"] { transform: translateY(32px) scale(0.90); z-index: 3; opacity: 0.85; }
+.crypto-card[data-pos="3"] { transform: translateY(44px) scale(0.85); z-index: 2; opacity: 0.65; }
+.crypto-card[data-pos="4"] { transform: translateY(54px) scale(0.80); z-index: 1; opacity: 0.45; }
+
+/* Slide-out animation */
+.crypto-card.sliding-out {
+  transform: translateX(140%) rotate(14deg) scale(0.92) !important;
+  opacity: 0 !important;
+  z-index: 10 !important;
+}
+
+/* Per-coin gradients */
+.crypto-card[data-asset="BTC"]  { background: linear-gradient(135deg, #F7931A 0%, #C8620A 100%); }
+.crypto-card[data-asset="ETH"]  { background: linear-gradient(135deg, #627EEA 0%, #3A4FBD 100%); }
+.crypto-card[data-asset="USDT"] { background: linear-gradient(135deg, #26A17B 0%, #126B50 100%); }
+.crypto-card[data-asset="BNB"]  { background: linear-gradient(135deg, #F3BA2F 0%, #C49010 100%); }
+.crypto-card[data-asset="USDC"] { background: linear-gradient(135deg, #2775CA 0%, #0F4FA0 100%); }
+
+/* Card inner layout */
+.crypto-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.crypto-card-brand {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.crypto-card-chip {
+  width: 36px;
+  height: 26px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.12));
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.crypto-card-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.crypto-card-center .coin-icon {
+  width: 58px;
+  height: 58px;
+  font-size: 26px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  flex-shrink: 0;
+}
+
+.crypto-card-coin-name strong {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.crypto-card-coin-name span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+}
+
+.crypto-card-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.crypto-card-label {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.crypto-card-network {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+/* Hint text below the stack */
+.card-stack-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
 }
 
 /* ---------- Hero "live rates" carousel ---------- */
@@ -347,6 +509,166 @@ body {
 .ticker-change.down {
   color: var(--danger);
   background: var(--danger-soft);
+}
+
+/* ---------- Live Rates Slider ---------- */
+.rates-slider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rates-slider-viewport {
+  flex: 1;
+  overflow: hidden;
+}
+
+.rates-slider-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rate-slide-card {
+  flex: 0 0 calc((100% - 40px) / 3);
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.35s ease;
+}
+
+.rate-slide-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient);
+}
+
+.rate-slide-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 20px 48px rgba(0, 224, 168, 0.12);
+  transform: translateY(-5px);
+}
+
+.rate-slide-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.rate-slide-meta { flex: 1; min-width: 0; }
+
+.rate-slide-meta strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rate-slide-meta span {
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+
+.rate-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.rate-blink-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  flex-shrink: 0;
+  animation: blinkPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes blinkPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 224, 168, 0.7);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(0.65);
+    box-shadow: 0 0 0 9px rgba(0, 224, 168, 0);
+  }
+}
+
+.rate-slide-card:nth-child(1) .rate-blink-dot { animation-delay: 0s; }
+.rate-slide-card:nth-child(2) .rate-blink-dot { animation-delay: 0.28s; }
+.rate-slide-card:nth-child(3) .rate-blink-dot { animation-delay: 0.56s; }
+.rate-slide-card:nth-child(4) .rate-blink-dot { animation-delay: 0.84s; }
+.rate-slide-card:nth-child(5) .rate-blink-dot { animation-delay: 1.12s; }
+
+.rate-slide-price {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.rate-slide-ngn {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.rate-slide-change {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.rates-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* ---------- Trade with Us ---------- */
+.trade-stats {
+  display: flex;
+  gap: 32px;
+  margin: 24px 0 8px;
+  flex-wrap: wrap;
+}
+
+.trade-stat strong {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradShift 6s ease-in-out infinite;
+}
+
+.trade-stat span {
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 /* ---------- Countries grid ---------- */
@@ -972,6 +1294,7 @@ body {
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
   .countries-grid { grid-template-columns: repeat(3, 1fr); }
+  .rate-slide-card { flex: 0 0 calc((100% - 20px) / 2); }
 }
 
 @media (max-width: 980px) {
@@ -1022,6 +1345,9 @@ body {
 
 @media (max-width: 640px) {
   .countries-grid { grid-template-columns: repeat(2, 1fr); }
+  .rate-slide-card { flex: 0 0 100%; }
+  .rates-slider { gap: 8px; }
+  .trade-stats { gap: 20px; }
 
   .steps-grid,
   .assets-grid,

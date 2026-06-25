@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Shared app shell for user dashboard pages
+﻿/* =========================================================
+   PayRu — Shared app shell for user dashboard pages
    (sidebar, topbar, KYC banner, balance visibility toggle)
    ========================================================= */
 
@@ -18,7 +18,7 @@ function userSidebarHTML(activePage, user) {
   return `
     <a href="dashboard.html" class="logo sidebar-logo">
       <div class="logo-mark">P</div>
-      <span>Payru<span>Exchange</span></span>
+      <span>Pay<span>Ru</span></span>
     </a>
     <button class="sidebar-close" id="sidebarClose"><i class='bx bx-x'></i></button>
     <nav class="sidebar-nav">
@@ -26,6 +26,7 @@ function userSidebarHTML(activePage, user) {
       ${item("buy", "buy.html", "bx-wallet", "Buy Crypto")}
       ${item("sell", "sell.html", "bx-coin-stack", "Sell Crypto")}
       ${item("transactions", "transactions.html", "bx-receipt", "Transactions")}
+      ${item("deriv-funding", "deriv-funding.html", "bx-credit-card", "Deriv Funding")}
       ${item("notifications", "notifications.html", "bx-bell", "Notifications")}
       ${item("profile", "profile.html", "bx-user-circle", "Profile")}
     </nav>

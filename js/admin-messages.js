@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Admin broadcast messages page
+﻿/* =========================================================
+   PayRu — Admin broadcast messages page
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {

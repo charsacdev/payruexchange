@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Shared app shell for admin pages
+﻿/* =========================================================
+   PayRu — Shared app shell for admin pages
    (sidebar, topbar) — admin pages live in /admin/*.html
    ========================================================= */
 
@@ -18,7 +18,7 @@ function adminSidebarHTML(activePage) {
   return `
     <a href="dashboard.html" class="logo sidebar-logo">
       <div class="logo-mark">P</div>
-      <span>Payru<span>Exchange</span></span>
+      <span>Pay<span>Ru</span></span>
     </a>
     <button class="sidebar-close" id="sidebarClose"><i class='bx bx-x'></i></button>
     <nav class="sidebar-nav">
@@ -28,6 +28,7 @@ function adminSidebarHTML(activePage) {
       ${item("withdrawals", "withdrawals.html", "bx-upload", "Withdrawals", stats.pendingPayouts)}
       ${item("transactions", "transactions.html", "bx-receipt", "Transactions")}
       ${item("users", "users.html", "bx-group", "Users")}
+      ${item("deriv-funding", "deriv-funding.html", "bx-credit-card", "Deriv Funding")}
       ${item("messages", "messages.html", "bx-envelope", "Messages")}
       ${item("settings", "settings.html", "bx-cog", "Settings")}
     </nav>

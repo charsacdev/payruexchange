@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem("payru-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deriv Funding — PayRu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/datatable-theme.css" />
+</head>
+<body data-page="deriv-funding" data-title="Deriv Funding" data-subtitle="Fund or withdraw from your Deriv account.">
+
+  <div class="app-layout">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-topbar" id="topbar"></header>
+
+      <div class="page-content">
+
+        <!-- Wallet balance banner -->
+        <div class="card" style="margin-bottom:20px; background:var(--primary-soft); border:1px solid rgba(0,224,168,0.25);">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div class="stat-icon icon-success" style="flex-shrink:0;"><i class='bx bx-wallet-alt'></i></div>
+            <div>
+              <div style="font-size:12.5px; color:var(--text-muted);">PayRu Wallet Balance</div>
+              <div style="font-family:'Sora',sans-serif; font-size:22px; font-weight:800; color:var(--primary);" id="walletBalanceDisplay">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="card" style="margin-bottom:24px; padding-bottom:0; padding-top:0;">
+          <div style="display:flex;">
+            <button class="deriv-tab active" data-tab="fund">
+              <i class='bx bx-plus-circle'></i> Fund Deriv Account
+            </button>
+            <button class="deriv-tab" data-tab="withdraw">
+              <i class='bx bx-minus-circle'></i> Withdraw from Deriv
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== FUND PANEL ===== -->
+        <div id="fundPanel">
+          <div class="card">
+            <div class="card-head"><h3>Fund My Deriv Account</h3></div>
+            <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">
+              Enter your Deriv CR number and the amount you want funded. The equivalent NGN will be deducted from your PayRu wallet.
+            </p>
+
+            <!-- Step 1 -->
+            <div id="fundStep1">
+              <div class="form-group">
+                <label class="form-label">Your Deriv CR Number</label>
+                <div style="display:flex; gap:10px;">
+                  <input type="text" id="fundCR" class="form-control" placeholder="e.g. CR1234567" style="flex:1; text-transform:uppercase;" />
+                  <button class="btn btn-outline" id="verifyCRBtn" type="button"><i class='bx bx-search-alt'></i> Verify</button>
+                </div>
+                <div id="crVerifyMsg" style="font-size:13px; margin-top:8px;"></div>
+              </div>
+
+              <div id="fundAmountSection" style="display:none;">
+                <div class="form-group">
+                  <label class="form-label">Amount to Fund (USD)</label>
+                  <input type="number" id="fundAmount" class="form-control" placeholder="e.g. 50" min="5" step="1" />
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:13.5px;">
+                    <i class='bx bx-transfer-alt' style="color:var(--primary);"></i>
+                    <span style="color:var(--text-muted);">Current funding rate:</span>
+                    <strong id="fundRateInline" style="color:var(--primary);">—</strong>
+                    <span style="color:var(--text-muted);">per $1</span>
+                  </div>
+                </div>
+
+                <!-- Rate breakdown -->
+                <div id="fundBreakdown" style="display:none; background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:var(--radius); padding:16px; margin-bottom:20px;">
+                  <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;">
+                    <div style="display:flex; justify-content:space-between;">
+                      <span style="color:var(--text-muted);">Exchange Rate</span>
+                      <strong id="bdRate">—</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                      <span style="color:var(--text-muted);">Amount in USD</span>
+                      <strong id="bdUSD">—</strong>
+                    </div>
+                    <div style="border-top:1px solid var(--border-soft); padding-top:10px; display:flex; justify-content:space-between;">
+                      <span style="color:var(--text-muted);">Will be deducted from wallet</span>
+                      <strong id="bdDeduct" style="color:var(--danger); font-size:15px;">—</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                      <span style="color:var(--text-muted);">Wallet balance after</span>
+                      <strong id="bdAfter" style="color:var(--text);">—</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="fundInsufficientMsg" style="display:none; background:var(--danger-soft); border:1px solid var(--danger); border-radius:var(--radius); padding:14px; margin-bottom:16px; font-size:14px; color:var(--danger);">
+                  <i class='bx bx-x-circle'></i> <strong>Insufficient funds.</strong> Your wallet balance is not enough for this amount.
+                  <a href="sell.html" style="color:var(--danger); text-decoration:underline; margin-left:4px;">Top up wallet →</a>
+                </div>
+
+                <button class="btn btn-primary" id="fundProceedBtn" style="display:none;">
+                  <i class='bx bx-lock-alt'></i> Proceed to Verification
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: OTP -->
+            <div id="fundStep2" style="display:none;">
+              <div style="background:var(--info-soft); border:1px solid var(--info); border-radius:var(--radius); padding:14px 18px; margin-bottom:24px; font-size:14px;">
+                <i class='bx bx-envelope' style="color:var(--info);"></i>
+                A verification code has been sent to your registered email. Enter <strong>any code</strong> to continue (demo mode).
+              </div>
+              <div style="background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:var(--radius); padding:14px 18px; margin-bottom:20px;">
+                <div style="font-size:13px; color:var(--text-muted); margin-bottom:8px;">Summary</div>
+                <div id="fundOTPSummary" style="font-size:14px;"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">OTP Verification Code</label>
+                <input type="text" id="fundOTP" class="form-control" placeholder="Enter code" maxlength="8"
+                  style="letter-spacing:6px; font-size:22px; text-align:center; font-weight:700;" />
+              </div>
+              <div style="display:flex; gap:10px; margin-top:8px;">
+                <button class="btn btn-outline" id="fundBackBtn" type="button"><i class='bx bx-arrow-back'></i> Back</button>
+                <button class="btn btn-primary" id="fundVerifyOTPBtn" type="button" style="flex:1;"><i class='bx bx-check-double'></i> Verify &amp; Fund</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Success -->
+            <div id="fundStep3" style="display:none; text-align:center; padding:20px 0;">
+              <div style="width:72px; height:72px; border-radius:50%; background:var(--success-soft); display:inline-flex; align-items:center; justify-content:center; font-size:32px; color:var(--success); margin-bottom:18px;">
+                <i class='bx bx-check'></i>
+              </div>
+              <h3 style="margin-bottom:8px;">Funding Request Submitted!</h3>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Your wallet has been debited. The admin will credit your Deriv account within 30 minutes.</p>
+              <div id="fundReceipt" style="background:var(--bg-soft); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:20px; text-align:left;"></div>
+              <button class="btn btn-primary" id="fundNewBtn" type="button"><i class='bx bx-plus'></i> New Request</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== WITHDRAW PANEL ===== -->
+        <div id="withdrawPanel" style="display:none;">
+          <div class="card">
+            <div class="card-head"><h3>Withdraw from Deriv to Wallet</h3></div>
+            <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">
+              Copy the company Deriv CR number below, transfer from your Deriv account, then submit. Once confirmed, your PayRu wallet will be credited in Naira.
+            </p>
+
+            <!-- Step 1 -->
+            <div id="wdStep1">
+              <!-- Company CR — full highlighted border card -->
+              <div style="
+                border: 2px solid var(--primary);
+                border-radius: var(--radius-lg);
+                padding: 24px 28px;
+                margin-bottom: 28px;
+                background: var(--primary-soft);
+                box-shadow: 0 0 0 4px rgba(0,224,168,0.10), 0 8px 32px rgba(0,224,168,0.12);
+                position: relative;
+                overflow: hidden;
+              ">
+                <div style="font-size:11.5px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;">
+                  <i class='bx bx-buildings'></i> &nbsp;Company Deriv CR — Send Your Funds Here
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+                  <div id="wdCompanyCRDisplay" style="
+                    font-family:'Sora',sans-serif;
+                    font-size:32px;
+                    font-weight:800;
+                    color:var(--primary);
+                    letter-spacing:3px;
+                    line-height:1;
+                  ">—</div>
+                  <button class="btn btn-primary" id="copyCRBtn" type="button">
+                    <i class='bx bx-copy'></i> Copy CR Number
+                  </button>
+                </div>
+                <div style="font-size:13px; color:var(--text-muted); margin-top:14px;">
+                  Go to your Deriv account → <strong>Transfer funds</strong> → paste this CR as the recipient, then complete the steps below.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Your Deriv CR Number</label>
+                <div style="display:flex; gap:10px;">
+                  <input type="text" id="wdCR" class="form-control" placeholder="e.g. CR1234567" style="flex:1; text-transform:uppercase;" />
+                  <button class="btn btn-outline" id="verifyWdCRBtn" type="button"><i class='bx bx-search-alt'></i> Verify</button>
+                </div>
+                <div id="wdCrMsg" style="font-size:13px; margin-top:8px;"></div>
+              </div>
+
+              <div id="wdAmountSection" style="display:none;">
+                <div class="form-group">
+                  <label class="form-label">Amount to Withdraw (USD)</label>
+                  <input type="number" id="wdAmount" class="form-control" placeholder="e.g. 100" min="5" step="1" />
+                  <div style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:13.5px;">
+                    <i class='bx bx-transfer-alt' style="color:var(--primary);"></i>
+                    <span style="color:var(--text-muted);">Current withdrawal rate:</span>
+                    <strong id="wdRateInline" style="color:var(--primary);">—</strong>
+                    <span style="color:var(--text-muted);">per $1</span>
+                  </div>
+                </div>
+
+                <div id="wdBreakdown" style="display:none; background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:var(--radius); padding:16px; margin-bottom:20px;">
+                  <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;">
+                    <div style="display:flex; justify-content:space-between;">
+                      <span style="color:var(--text-muted);">Exchange Rate</span>
+                      <strong id="wdBdRate">—</strong>
+                    </div>
+                    <div style="border-top:1px solid var(--border-soft); padding-top:10px; display:flex; justify-content:space-between;">
+                      <span style="color:var(--text-muted);">You'll receive in wallet</span>
+                      <strong id="wdBdReceive" style="color:var(--success); font-size:15px;">—</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn btn-primary" id="wdProceedBtn" type="button" style="display:none;">
+                  <i class='bx bx-lock-alt'></i> Proceed to Verification
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: OTP -->
+            <div id="wdStep2" style="display:none;">
+              <div style="background:var(--info-soft); border:1px solid var(--info); border-radius:var(--radius); padding:14px 18px; margin-bottom:20px; font-size:14px;">
+                <i class='bx bx-envelope' style="color:var(--info);"></i>
+                Verification code sent to your email. Enter <strong>any code</strong> to confirm (demo mode).
+              </div>
+              <div style="background:var(--bg-soft); border:1px solid var(--border-soft); border-radius:var(--radius); padding:14px 18px; margin-bottom:20px;">
+                <div style="font-size:13px; color:var(--text-muted); margin-bottom:8px;">Summary</div>
+                <div id="wdOTPSummary" style="font-size:14px;"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">OTP Verification Code</label>
+                <input type="text" id="wdOTP" class="form-control" placeholder="Enter code" maxlength="8"
+                  style="letter-spacing:6px; font-size:22px; text-align:center; font-weight:700;" />
+              </div>
+              <div style="display:flex; gap:10px; margin-top:8px;">
+                <button class="btn btn-outline" id="wdBackBtn" type="button"><i class='bx bx-arrow-back'></i> Back</button>
+                <button class="btn btn-primary" id="wdConfirmBtn" type="button" style="flex:1;"><i class='bx bx-check-double'></i> Confirm Withdrawal</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Success -->
+            <div id="wdStep3" style="display:none; text-align:center; padding:20px 0;">
+              <div style="width:72px; height:72px; border-radius:50%; background:var(--success-soft); display:inline-flex; align-items:center; justify-content:center; font-size:32px; color:var(--success); margin-bottom:18px;">
+                <i class='bx bx-check'></i>
+              </div>
+              <h3 style="margin-bottom:8px;">Withdrawal Request Submitted!</h3>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">
+                Transfer the amount to the company CR on Deriv now. Once we confirm receipt, your PayRu wallet will be credited.
+              </p>
+              <div id="wdReceipt" style="background:var(--bg-soft); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:20px; text-align:left;"></div>
+              <button class="btn btn-primary" id="wdNewBtn" type="button"><i class='bx bx-plus'></i> New Request</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- History moved to Transactions page -->
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/deriv-funding.js"></script>
+</body>
+</html>

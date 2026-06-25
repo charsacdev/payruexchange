@@ -1,5 +1,5 @@
-/* =========================================================
-   PayruExchange — Light / dark theme toggle
+﻿/* =========================================================
+   PayRu — Light / dark theme toggle
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {

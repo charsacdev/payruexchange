@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Withdrawals — PayruExchange Admin</title>
+  <title>Withdrawals — PayRu Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -29,13 +29,22 @@
       <div class="page-content">
         <div class="card">
           <div class="filter-bar">
-            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search by name, email, bank or wallet..." />
+            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search by name, email, bank, wallet or CR..." />
+            <select id="typeFilter" class="form-control">
+              <option value="all">All Types</option>
+              <option value="crypto">Crypto Payouts</option>
+              <option value="deriv">Deriv Withdrawal</option>
+            </select>
             <select id="statusFilter" class="form-control">
               <option value="active">Awaiting Action</option>
+              <option value="all">All Statuses</option>
               <option value="processing_payout">Processing Bank Payout</option>
               <option value="processing_crypto_payout">Processing Crypto Payout</option>
               <option value="completed">Completed</option>
-              <option value="all">All</option>
+              <option value="pending">Deriv Pending</option>
+              <option value="received">CR Received</option>
+              <option value="paid">Wallet Credited</option>
+              <option value="rejected">Rejected</option>
             </select>
           </div>
 
@@ -46,6 +55,7 @@
                   <th>#</th>
                   <th>User</th>
                   <th>Type</th>
+                  <th>Asset / CR</th>
                   <th>Amount</th>
                   <th>Payout Details</th>
                   <th>Status</th>

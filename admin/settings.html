@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Settings — PayruExchange Admin</title>
+  <title>Settings — PayRu Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -95,26 +95,65 @@
 
           <!-- ===== Right column ===== -->
           <div>
-            <div class="card">
-              <div class="card-head"><h3>Exchange Rates</h3></div>
+            <!-- Crypto Exchange Rates -->
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-head"><h3>Exchange Rates — Crypto</h3></div>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Rates applied to all buy and sell crypto transactions on PayRu.</p>
               <form id="ratesForm">
                 <div class="form-row">
                   <div class="form-group">
                     <label class="form-label" for="buyRate">Buy Rate (₦ per $1)</label>
                     <input type="number" id="buyRate" class="form-control" min="1" step="1" inputmode="numeric" />
-                    <div class="form-hint">Rate charged when users buy crypto from the platform.</div>
+                    <div class="form-hint">Rate charged when users buy crypto.</div>
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="sellRate">Sell Rate (₦ per $1)</label>
                     <input type="number" id="sellRate" class="form-control" min="1" step="1" inputmode="numeric" />
-                    <div class="form-hint">Rate paid out when users sell crypto to the platform.</div>
+                    <div class="form-hint">Rate paid when users sell crypto.</div>
                   </div>
                 </div>
                 <div class="notice-box notice-info">
                   <i class='bx bx-info-circle'></i>
-                  <span>Current spread (platform margin): <strong id="rateSpread">₦0</strong> per $1</span>
+                  <span>Current spread: <strong id="rateSpread">₦0</strong> per $1</span>
                 </div>
-                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Update Rates</button>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Update Crypto Rates</button>
+              </form>
+            </div>
+
+            <!-- Deriv Exchange Rate -->
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-head"><h3>Exchange Rate — Deriv</h3></div>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Rate applied specifically to Deriv account funding and withdrawal transactions. Set this independently from the crypto rate.</p>
+              <form id="derivRateForm">
+                <div class="form-group">
+                  <label class="form-label" for="derivRate">Deriv Rate (₦ per $1)</label>
+                  <input type="number" id="derivRate" class="form-control" min="1" step="1" inputmode="numeric" />
+                  <div class="form-hint">Amount in Naira debited/credited per $1 of Deriv transaction.</div>
+                </div>
+                <div class="notice-box notice-info">
+                  <i class='bx bx-info-circle'></i>
+                  <span>Deriv spread vs buy rate: <strong id="derivSpread">₦0</strong> per $1</span>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Update Deriv Rate</button>
+              </form>
+            </div>
+
+            <!-- Deriv Account Settings -->
+            <div class="card">
+              <div class="card-head"><h3>Deriv Account Settings</h3></div>
+              <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">The company CR number and Payment ID shown to users when they request a Deriv withdrawal.</p>
+              <form id="derivSettingsForm">
+                <div class="form-group">
+                  <label class="form-label" for="companyCR">Company Deriv CR Number</label>
+                  <input type="text" id="companyCR" class="form-control" placeholder="e.g. CR9001234" />
+                  <div class="form-hint">Users will send Deriv withdrawals to this CR number.</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="paymentID">Payment ID</label>
+                  <input type="text" id="paymentID" class="form-control" placeholder="e.g. PAY-PAYRU-001" />
+                  <div class="form-hint">Unique ID users must reference when sending Deriv transfers.</div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Save Deriv Settings</button>
               </form>
             </div>
           </div>
