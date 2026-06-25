@@ -1308,6 +1308,16 @@ body {
   /* Show card stack BEFORE the hero text on mobile */
   .hero-visual { order: -1; }
 
+  /* Prevent card stack from touching screen edges */
+  .crypto-card-stack {
+    width: min(360px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  .crypto-card {
+    width: 100%;
+  }
+
   .hero-text,
   .hero-visual {
     min-width: 0;
@@ -1349,6 +1359,16 @@ body {
 
 @media (max-width: 640px) {
   .countries-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Give the card stack breathing room from screen edges */
+  .crypto-card-stack {
+    width: calc(100% - 28px);
+    margin: 0 14px;
+  }
+
+  .crypto-card {
+    width: 100%;
+  }
 
   /* Expand rate slider cards on mobile */
   .rate-slide-card {
